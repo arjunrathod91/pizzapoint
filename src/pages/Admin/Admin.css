@@ -1,0 +1,42 @@
+.admin{
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+
+}
+.admin .left{
+    height: 100%;
+    width: 30%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 20px;
+
+}
+.left .column{
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 10px;
+    gap: 20px;
+    justify-content: start;
+}
+.column span{
+    font-size: 20px;
+    font-weight: 500;
+}
+.admin .right{
+    width: 70%;
+    height: 100%;
+    background-color: rgb(233, 233, 233);
+    position: relative;
+}
+.add-column{
+    display: flex;
+    width: 200px;
+    padding: 5px 15px;
+    border-radius: 10px;
+    gap: 20px;
+    justify-content: start;
+    background-color: rgb(255, 159, 159);
+}

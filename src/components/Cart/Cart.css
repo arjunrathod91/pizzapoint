@@ -1,0 +1,51 @@
+.add-card{
+    background-color: rgb(254, 254, 254);
+    width: 400px;
+    padding: 10px;
+    flex-direction: column;
+    border-radius: 5px;
+    position: absolute;
+    justify-content: center;
+    align-items: start;
+    top: 10%;
+    left: 20%;
+}
+.right .add-card input{
+    padding: 10px;
+    outline: none;
+    border-radius: 5px;
+    width: 90%;
+    border: 1px solid rgb(200, 200, 200);
+    margin: 10px;
+}
+.add-btn{
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 5px;background-color: rgb(197, 231, 197);
+    width: 100%;
+}
+.option{
+    display:flex ;
+    justify-content: start;
+    align-items: center;
+}
+label{
+    margin-left: 10px;
+}
+.option div{
+    flex: 1;
+}
+.veg{
+    /* background-color: rgb(174, 255, 184); */
+    display: flex;
+
+}
+.non-veg{
+    /* background-color: rgb(255, 174, 174); */
+    display: flex;
+
+}
+.non-veg span{
+    width: 200px;
+}

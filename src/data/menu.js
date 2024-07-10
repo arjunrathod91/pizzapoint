@@ -1,5 +1,4 @@
-[
-    //pizzas
+const pizza = [
     {
         name: 'Classic Chicken Tikka Pizza [7 inches]',
         ingridient: 'Onion, tomato, chicken tikka and liquid cheese and mozzarella cheese.',
@@ -61,9 +60,6 @@
         tag:'chicken peri peri pizza'
 
     },
-
-
-
 
     {
         name: 'Classic Onion Capsicum Pizza [7 inches]',

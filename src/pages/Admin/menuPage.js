@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Orders() {
+function menuPage() {
   return (
     <div>
-      <h1>Orders</h1>
+      <h1>menu</h1>
     </div>
   )
 }
 
-export default Orders
+export default menuPage

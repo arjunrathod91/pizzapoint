@@ -7,10 +7,12 @@ import Menu from './pages/Menu/Menu'
 import Offers from './pages/Offers/Offers'
 import Footer from './components/Footer/Footer'
 import Admin from './pages/Admin/Admin'
+import { MyContextProvider } from './context/Context'
 
 function App() {
   return (
     <div>
+      <MyContextProvider>
       <BrowserRouter>
       <Navbar/>
       <Routes>
@@ -21,6 +23,7 @@ function App() {
         <Route path='/admin' element={<Admin/>}/>
       </Routes>
       </BrowserRouter>
+      </MyContextProvider>
     </div>
   )
 }

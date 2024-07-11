@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Home.css";
 import pizza from "../../Images/pizza img 2.png";
@@ -12,9 +12,13 @@ import veggieSupreme from "../../Images/veggie supreme.jpg";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import Footer from "../../components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import { Context } from "../../context/Context";
+
 
 function Home() {
   const navigate = useNavigate();
+  const {sidebarOpen,setSidebarOpen} = useContext(Context)
 
   const pizza = [
     {
@@ -464,6 +468,9 @@ function Home() {
   ];
   return (
     <div className="home">
+      <div className="sidebar-section" style={{display:`${sidebarOpen ? 'flex':'none' }`}}>
+        <Sidebar/>
+      </div>
       <div className="overflow">
         <div className="slider">
           <img src="https://static.vecteezy.com/system/resources/previews/023/961/870/non_2x/pizza-banner-or-background-pizza-on-the-board-illustration-vector.jpg" />
@@ -507,39 +514,42 @@ function Home() {
       <section className="section2">
         <h2>BestSeller</h2>
         <div className="s2-down">
-          { pizza.map((item) => (
+          {pizza.map((item) =>
             item.img ? (
-            <div className="dishes" item={item}>
-              <img src={item.img} alt="" />
-              <div className="content">
-                <div className="d1">
-                  <h3>{item.name}</h3>
-                  <span className="rating">
-                    {item.rating}
-                    <StarHalfIcon sx={{ fontSize: 19 }} />
-                  </span>
+              <div className="dishes" item={item}>
+                <img src={item.img} alt="" />
+                <div className="content">
+                  <div className="d1">
+                    <h3>{item.name}</h3>
+                    <span className="rating">
+                      {item.rating}
+                      <StarHalfIcon sx={{ fontSize: 19 }} />
+                    </span>
+                  </div>
+                  <div className="d2">
+                    <p>{item.ingridient.substring(0, 10)}</p>
+                    <p className="price">{item.price}.</p>
+                  </div>
+                  {/* <div className="order" style={{cursor:'pointer'}} onClick={()=>navigate('https://wa.me/c/919322538480')}>Order Now</div> */}
+                  <Link
+                    className="order"
+                    style={{ cursor: "pointer" }}
+                    to="https://wa.me/c/919322538480"
+                  >
+                    Order Now
+                  </Link>
                 </div>
-                <div className="d2">
-                  <p>{item.ingridient.substring(0, 10)}</p>
-                  <p className="price">{item.price}.</p>
-                </div>
-                {/* <div className="order" style={{cursor:'pointer'}} onClick={()=>navigate('https://wa.me/c/919322538480')}>Order Now</div> */}
-                <Link
-                  className="order"
-                  style={{ cursor: "pointer" }}
-                  to="https://wa.me/c/919322538480"
-                >
-                  Order Now
-                </Link>
               </div>
-            </div>) : ''
-          ))}
+            ) : (
+              ""
+            )
+          )}
         </div>
       </section>
       <section className="section2">
         <h2>Top Dishes</h2>
         <div className="s2-down">
-          {pizza.map((item,index) => (
+          {pizza.map((item, index) => (
             <div className="dishes" key={index}>
               <img src={item.img} alt="" />
               <div className="content">

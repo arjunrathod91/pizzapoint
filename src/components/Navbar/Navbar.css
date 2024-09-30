@@ -1,11 +1,14 @@
 .navbar{
     width: 100%;
     height: 50px;
+    top: 0;
+    left: 0;
+    position: sticky;
     background-color: rgb(249, 56, 56);
     display: flex;
     justify-content: space-around;
     align-items: center;
-    position: relative;
+    z-index: 2;
 }
 .left{
     display: flex;
@@ -45,7 +48,7 @@ a{
     padding: 5px;
     display: none;
 }
-@media only screen and (max-width:634px){
+@media only screen and (max-width:422px){
     .navbar{
         height: 50px;
         width: 100%;

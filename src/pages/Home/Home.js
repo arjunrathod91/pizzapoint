@@ -500,7 +500,7 @@ function Home() {
         </div>
         <div className="s1-down">
           <div className="box">
-            <img src={pizza} alt="" />
+            <img src="https://static.vecteezy.com/system/resources/previews/021/311/747/non_2x/pizza-transparent-background-png.png" alt="" />
             <p>Pizza</p>
           </div>
           <div className="box">

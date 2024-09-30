@@ -121,35 +121,41 @@ function Cart() {
     // type: "chicken",
     // tag: "chicken sandwich",
     <div className="cart">
-      <div className="cart-box">
-        {cart.map((item, index) => (
-              <div className="item-box" index={index}>
-                <div className="img-sec">
-                  <img src={item.img} />
+      {cart.length == 0 ? (
+        <div style={{height:'100%',width:'100%',backgroundColor:'#fff',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',opacity:'50%'}}>
+          <div style={{fontWeight:'500',fontFamily:'sans-serif',fontSize:'20px'}}>Your cart is empty</div>
+          <img style={{height:'250px',width:'250px',}} src="https://img.freepik.com/premium-vector/pizza-food-truck-vector-illustration_444196-6061.jpg?w=2000"/>
+          <button style={{backgroundColor:'red',color:'white',padding:'10px 20px',fontWeight:'500',border:'none',outline:'none',borderRadius:'4px',fontSize:'18px',cursor:'pointer'}} onClick={()=>navigate('/')}>Order Now</button>
+        </div>
+      ) : <div className="cart-box">
+      {cart.map((item, index) => (
+            <div className="item-box" index={index}>
+              <div className="img-sec">
+                <img src={item.img} />
+              </div>
+              <div className="info-sec">
+                <strong>{item.name}</strong>
+                <p>{item.ingridient}</p>
+                <h2>₹{item.price}</h2>
+                <div style={{display:'flex',justifyContent:'start',gap:'10px'}}>
+                  Quantity{" "}
+                  <button onClick={() => decreasingOrder(item)}>-</button>
+                  {item.quantity}
+                  <button onClick={() => increasingOrder(item)}>+</button>
                 </div>
-                <div className="info-sec">
-                  <strong>{item.name}</strong>
-                  <p>{item.ingridient}</p>
-                  <h2>₹{item.price}</h2>
-                  <div style={{display:'flex',justifyContent:'start',gap:'10px'}}>
-                    Quantity{" "}
-                    <button onClick={() => decreasingOrder(item)}>-</button>
-                    {item.quantity}
-                    <button onClick={() => increasingOrder(item)}>+</button>
-                  </div>
-                  <p>{item.type}</p>
-                  <div
-                    style={{ cursor: "pointer",color:'black',height:'20px',width:'100%',display:'flex',justifyContent:'end' }}
-                    onClick={() => deleteItem(item)}
-                    className="remove"
-                  >
-                    <DeleteIcon/>
-                  </div>
+                <p>{item.type}</p>
+                <div
+                  style={{ cursor: "pointer",color:'black',height:'20px',width:'100%',display:'flex',justifyContent:'end' }}
+                  onClick={() => deleteItem(item)}
+                  className="remove"
+                >
+                  <DeleteIcon/>
                 </div>
               </div>
-            ))}
-            <button className="order-btn" onClick={orderNowBtn}>Order Now {cart.length == 0 ? 0 : total}</button>
-      </div>
+            </div>
+          ))}
+          <button className="order-btn" onClick={orderNowBtn}>Order Now {cart.length == 0 ? 0 : total}</button>
+    </div>}
     </div>
   );
 }

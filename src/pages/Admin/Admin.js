@@ -4,7 +4,7 @@ import { AddAPhoto, Dashboard, ShoppingCart } from "@mui/icons-material";
 import { Menu } from "@mui/material";
 import OrdersPage from "./ordersPage";
 import MenuPage from "./menuPage";
-import DashboardPage from "./dashboardPage";
+// import DashboardPage from "./dashboardPage";
 
 function Admin() {
   const [hover, setHover] = useState(false);
@@ -13,8 +13,8 @@ function Admin() {
   const renderPage = () => {
     if (page === "orders") {
       return <OrdersPage/>
-    } else if (page === "dashboard") {
-      return <DashboardPage/>
+    // } else if (page === "dashboard") {
+    //   return <DashboardPage/>
     } else if (page === "menu") {
       return <MenuPage />;
     }

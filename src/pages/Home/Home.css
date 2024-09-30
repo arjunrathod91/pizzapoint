@@ -94,8 +94,6 @@
     overflow-x: auto;
 }
 .box{
-    /* height: 200px;
-    width: 200px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -288,6 +286,12 @@
         width: 350px;
     }
     
+}
+
+@media only screen and (max-width:812px) {
+    .s1-down{
+        justify-content: start;
+    }
 }
 @media only screen and (max-width:607px){
     .s-left img{

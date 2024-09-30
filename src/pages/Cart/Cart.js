@@ -3,6 +3,7 @@ import "./Cart.css";
 import { Context } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
+import logo from '../../Images/logo.png'
 
 function Cart() {
   const { cart, setCart, total, setTotal,loggedIn,setLoggedIn,allorders,setAllOrders } = useContext(Context);
@@ -43,7 +44,7 @@ function Cart() {
     if(loggedIn){
       if(total>0){
         setAllOrders((prevOrders) => [...prevOrders, ...cart]);
-        // handlePayment()
+        handlePayment()
         navigate("/paymentmethod")
         setCart("")
       }
@@ -56,12 +57,12 @@ function Cart() {
   const handlePayment = () => {
     const options = {
         key: 'rzp_test_HY5jMRQoTZLe2y', // Enter your Razorpay Key ID
-        amount: "100", // Amount in paise (50000 paise = 500 INR){newPrice}
+        amount: `${total * 100}`, // Amount in paise (50000 paise = 500 INR){newPrice}
         currency: 'INR',
-        name: 'Your Company Name',
+        name: 'Pizza Point',
         description: 'Test Transaction',
         //   order_id:`order_${uuid.split('-')[0]}`,
-        // image: 'img/ishopstorelogo.png', // Optional: Add your logo URL
+        image: `${logo}`, // Optional: Add your logo URL
         handler: function (response) {
           navigate("/orderdetails")
             alert(`Payment successful: ${response.razorpay_payment_id}`);

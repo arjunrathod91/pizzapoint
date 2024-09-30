@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./profile.css";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../context/Context";
@@ -7,7 +7,18 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import LockIcon from "@mui/icons-material/Lock";
 function Login({}) {
   const navigate = useNavigate();
-  const { setLoggedIn } = useContext(Context);
+  const { setLoggedIn,profileDetails,setProfileDetails} = useContext(Context);
+  const [inputEmail,setInputEmail] = useState();
+  const [inputPassword,setInputPassword] = useState()
+
+  const handleBtn=()=>{
+    if(profileDetails.email === inputEmail && profileDetails.password === inputPassword){
+      navigate('/profile')
+    }
+    else{
+      alert('invalid')
+    }
+  }
   return (
     <div className="login">
         <div className="login-box">
@@ -18,17 +29,15 @@ function Login({}) {
             <label>
               <EmailIcon sx={{ fontSize: "16px" }} />
             </label>
-            <input type="text" placeholder="Email" />
+            <input type="text" placeholder="Email" value={inputEmail} onChange={(e)=>setInputEmail(e.target.value)} />
           </div>
           <div className="item">
             <label>
               <LockIcon sx={{ fontSize: "16px" }} />
             </label>
-            <input type="password" placeholder="Password" />
+            <input type="password" placeholder="Password" value={inputPassword} onChange={(e)=>setInputPassword(e.target.value)} />
           </div>
-          <div className="login-btn" onClick={() => setLoggedIn(true)}>
-            <span>Login</span>
-          </div>
+            <button className="login-btn" onClick={()=>{setLoggedIn(true);handleBtn()}}>Login</button>
           <span onClick={() => navigate("/signup")} style={{cursor:'pointer'}}>Create new account ? </span>
         </div>
     </div>

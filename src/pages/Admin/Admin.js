@@ -4,7 +4,7 @@ import { AddAPhoto, Dashboard, ShoppingCart } from "@mui/icons-material";
 import { Menu } from "@mui/material";
 import OrdersPage from "./ordersPage";
 import MenuPage from "./menuPage";
-import DashboardPage from "./dashboardpage";
+import DashboardPage from "./dashboardPage";
 
 function Admin() {
   const [hover, setHover] = useState(false);

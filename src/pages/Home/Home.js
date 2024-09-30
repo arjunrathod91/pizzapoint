@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Home.css";
 import pizza from "../../Images/pizza img 2.png";
@@ -15,10 +15,17 @@ import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Context } from "../../context/Context";
 
-
 function Home() {
   const navigate = useNavigate();
-  const {sidebarOpen,setSidebarOpen} = useContext(Context)
+  const { sidebarOpen, setSidebarOpen, cart, setCart, total, setTotal } =
+    useContext(Context);
+
+  const cartObj = (item) => {
+    setCart((prevCart) => {
+      return [...prevCart, { ...item, quantity: 1 }];
+    });
+    setTotal((prevTotal) => prevTotal + Number(item.price));
+  };
 
   const pizza = [
     {
@@ -468,8 +475,11 @@ function Home() {
   ];
   return (
     <div className="home">
-      <div className="sidebar-section" style={{display:`${sidebarOpen ? 'flex':'none' }`}}>
-        <Sidebar/>
+      <div
+        className="sidebar-section"
+        style={{ display: `${sidebarOpen ? "flex" : "none"}` }}
+      >
+        <Sidebar />
       </div>
       <div className="overflow">
         <div className="slider">
@@ -531,13 +541,20 @@ function Home() {
                     <p className="price">{item.price}.</p>
                   </div>
                   {/* <div className="order" style={{cursor:'pointer'}} onClick={()=>navigate('https://wa.me/c/919322538480')}>Order Now</div> */}
-                  <Link
+                  {/* <Link
                     className="order"
                     style={{ cursor: "pointer" }}
                     to="https://wa.me/c/919322538480"
                   >
                     Order Now
-                  </Link>
+                  </Link> */}
+                  <button
+                    className="order"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => cartObj(item)}
+                  >
+                    Order Now
+                  </button>
                 </div>
               </div>
             ) : (

@@ -8,6 +8,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import { Context } from '../../context/Context';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import WestIcon from '@mui/icons-material/West';
+import PersonIcon from '@mui/icons-material/Person';
 import { useLocation } from 'react-router-dom';
 
 function Navbar() {
@@ -32,12 +33,12 @@ function Navbar() {
           <li>Cart</li> */}
         </ul>
       </div>
-      <div style={{color:'white'}}>
+      <div style={{color:'white',gap:'20px',display:'flex'}}>
           <Link to="/cart"><ShoppingCartIcon/></Link>
+          <Link to="/profile"><PersonIcon/></Link>
         </div>
       <div className='menu' onClick={()=>setSidebarOpen(!sidebarOpen)}>
         {location.pathname === "/" ? <MenuIcon sx={{color:'white'}}/> : <Link to="/"><WestIcon sx={{color:'white'}}/></Link> }
-        
       </div>
       {open && <Sidebar/>}
     </div>

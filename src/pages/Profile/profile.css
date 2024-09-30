@@ -1,0 +1,110 @@
+/*Login*/
+.login{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-box{
+    width: 360px;
+    background-color: rgb(227, 227, 227);
+    border-radius: 5px;
+    flex-direction: column;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    padding:20px;
+    gap: 5px;
+}
+.login-box .header{
+    width: 100%;
+    justify-content: center;
+    align-self: center;
+    display: flex;
+    margin-bottom: 10px;
+}
+.header span{
+    font-weight: 600;
+    font-size:18px;
+    font-family: sans-serif;
+    }
+.item{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    gap: 5px;
+}
+.item input{
+    width: 100%;
+    height: 20px;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.login-btn{
+    display: block;
+    width: 100%;
+    background-color: rgb(168, 50, 50);
+    color: white;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+}
+.login-btn span{
+    padding: 5px;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+
+/*profile*/
+.profile{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+.profile .left{
+    background-color: rgba(255, 218, 218, 0.607);
+
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    padding: 10px;
+    padding-top: 30px;
+    gap: 0;
+}
+.left div{
+    cursor: pointer;
+    gap: 20px;
+    display: flex;
+    width: 90%;
+    justify-content: start;
+    padding: 15px;
+    border-radius: 10px;
+}
+.pro-sec:hover{
+    background-color: white;
+}
+.profile .right{
+    background-color: rgb(255, 255, 255);
+    flex: 4;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+@media only screen and (max-width:600px) {
+    .profile .right{
+    }
+    .profile .left{
+        display: none
+    }
+    
+}

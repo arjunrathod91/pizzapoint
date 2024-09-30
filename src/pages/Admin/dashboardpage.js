@@ -1,11 +1,13 @@
 import React from 'react'
+import Popup from '../../components/Popup/Popup'
 
-function dashboard() {
+function dashboardPage() {
   return (
     <div>
       <h1>Dashboard</h1>
+      <Popup/>
     </div>
   )
 }
 
-export default dashboard
+export default dashboardPage

@@ -45,7 +45,7 @@ a{
     padding: 5px;
     display: none;
 }
-@media only screen and (max-width:422px){
+@media only screen and (max-width:634px){
     .navbar{
         height: 50px;
         width: 100%;

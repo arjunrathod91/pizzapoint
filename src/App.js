@@ -8,6 +8,11 @@ import Offers from './pages/Offers/Offers'
 import Footer from './components/Footer/Footer'
 import Admin from './pages/Admin/Admin'
 import { MyContextProvider } from './context/Context'
+import Cart from './pages/Cart/Cart'
+import Login from './pages/Profile/Login'
+import Signup from './pages/Profile/Signup'
+import Profile from './pages/Profile/Profile'
+import OrderDetails from './pages/Cart/OrderDetails'
 
 function App() {
   return (
@@ -21,6 +26,11 @@ function App() {
         <Route path='/menu' element={<Menu/>}/>
         <Route path='/offers' element={<Offers/>}/>
         <Route path='/admin' element={<Admin/>}/>
+        <Route path='/cart' element={<Cart/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/signup' element={<Signup/>}/>
+        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/orderdetails' element={<OrderDetails/>}/>
       </Routes>
       </BrowserRouter>
       </MyContextProvider>

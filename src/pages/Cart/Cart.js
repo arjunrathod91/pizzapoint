@@ -15,6 +15,9 @@ function Cart() {
     setLoggedIn,
     allorders,
     setAllOrders,
+    newOrder,setNewOrder,
+    adminOrders,setAdminOrders,
+    profileDetails,setProfileDetails
   } = useContext(Context);
 
   const navigate = useNavigate();
@@ -60,7 +63,22 @@ function Cart() {
           date: currentDate,
         }));
         setAllOrders((prevOrders) => [...prevOrders, ...cartWithDate]);
-        handlePayment();
+
+        const latestOrder = profileDetails;
+        latestOrder["latestOrder"] = cartWithDate;
+        latestOrder["total"] = total;
+        localStorage.setItem("newOrder",JSON.stringify(latestOrder));
+        const prevOrders = JSON.parse(localStorage.getItem("adminOrder")) || [];
+        localStorage.setItem("adminOrder", JSON.stringify([...prevOrders, latestOrder]));
+        // setNewOrder(latestOrder)
+        // setAdminOrders((prevOrders) => [...prevOrders, newOrder])
+        // console.log(newOrder)
+        // console.log(adminOrders)
+        // const latestOrder = newOrder.map((item)=>{
+        //   //wanted to add user detail like name and 
+        // })
+        // setAdminOrders((prevOrders) => [...prevOrders, ...latestOrder])
+        // handlePayment();
         navigate("/paymentmethod");
         setCart("");
       }
@@ -135,6 +153,13 @@ function Cart() {
     // category: "sandwich",
     // type: "chicken",
     // tag: "chicken sandwich",
+    
+
+    //info to the owner
+    //name
+    //contact no
+    //email
+    //his order list 
     <div className="cart">
       {cart.length == 0 ? (
         <div

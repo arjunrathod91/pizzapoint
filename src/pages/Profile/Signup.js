@@ -20,12 +20,12 @@ function Signup() {
     const [address,setAddress] = useState()
 
     const handleBtn=()=>{
-      setProfileDetails({"username":username,
-        "email":email,
-        "password":password,
-        "contact":contact,
-        "address":address
-      })
+      // setProfileDetails({"username":username,
+      //   "email":email,
+      //   "password":password,
+      //   "contact":contact,
+      //   "address":address
+      // })
       setTimeout(() => {
         console.log(profileDetails);  // Log after a slight delay
       }, 0);

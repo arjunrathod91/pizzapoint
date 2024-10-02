@@ -14,10 +14,11 @@ import Footer from "../../components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Context } from "../../context/Context";
+import Card from "../../components/Card/Card";
 
 function Home() {
   const navigate = useNavigate();
-  const { sidebarOpen, setSidebarOpen, cart, setCart, total, setTotal } =
+  const { sidebarOpen, setSidebarOpen, cart, setCart, total, setTotal,category,setCategory } =
     useContext(Context);
 
   const cartObj = (item) => {
@@ -473,6 +474,32 @@ function Home() {
       tag: "french fries",
     },
   ];
+
+
+  const imgSrc = [
+    "https://static.vecteezy.com/system/resources/previews/023/961/870/original/pizza-banner-or-background-pizza-on-the-board-illustration-vector.jpg",
+    "https://th.bing.com/th/id/OIP.FFmT5wGpju1U9siFEF8lmAHaJl?w=535&h=693&rs=1&pid=ImgDetMain",
+    "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/cheese-pizza-ads-design-template-2fa7920016ef784e5897f4d95e281386_screen.jpg?ts=1691136569"
+  ]
+
+  const [sliderImg,setSliderImg] = useState(imgSrc[0]);
+  const [style, setStyle] = useState({});
+
+  const transition=(newImg)=>{
+    setStyle({
+      transform: 'translateX(-100%)', // Add transform effect, for example, scaling the image
+      transition: 'transform 0.4s ease-in-out', // Apply smooth transition
+    });
+
+    // Reset the style after the transition is complete (optional)
+    // setTimeout(() => {
+    //   setStyle({});
+    // }, 400);
+    setTimeout(() => {
+      setSliderImg(newImg);
+      setStyle({ transform: 'translateX(0)', transition: 'none' }); // Reset position after changing image
+    }, 400);
+  }
   return (
     <div className="home">
       <div
@@ -483,7 +510,12 @@ function Home() {
       </div>
       <div className="overflow">
         <div className="slider">
-          <img src="https://static.vecteezy.com/system/resources/previews/023/961/870/non_2x/pizza-banner-or-background-pizza-on-the-board-illustration-vector.jpg" />
+          <img src={sliderImg} style={style} />
+          <div className="controls">
+            <div className="ball" onClick={()=>{transition(imgSrc[0])}}></div>
+            <div className="ball" onClick={()=>{transition(imgSrc[1])}}></div>
+            <div className="ball" onClick={()=>{transition(imgSrc[2])}}></div>
+          </div>
           {/* <div className="s-left">
             <img src={''} alt="" />
           </div>
@@ -499,23 +531,23 @@ function Home() {
           <h2>Dishes</h2>
         </div>
         <div className="s1-down">
-          <div className="box">
+          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('pizza');navigate('/menu')}}>
             <img src="https://static.vecteezy.com/system/resources/previews/021/311/747/non_2x/pizza-transparent-background-png.png" alt="" />
             <p>Pizza</p>
           </div>
-          <div className="box">
+          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('burger');navigate('/menu')}}>
             <img src={burger} alt="" />
             <p>Burger</p>
           </div>
-          <div className="box">
+          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('fries');navigate('/menu')}}>
             <img src={fries} alt="" />
             <p>Fries</p>
           </div>
-          <div className="box">
+          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('momos');navigate('/menu')}}>
             <img src={momos} alt="" />
             <p>Momos</p>
           </div>
-          <div className="box">
+          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('sandwich');navigate('/menu')}}>
             <img src={sandwitch} alt="" />
             <p>Sandwitch</p>
           </div>
@@ -524,76 +556,23 @@ function Home() {
       <section className="section2">
         <h2>BestSeller</h2>
         <div className="s2-down">
-          {pizza.map((item) =>
+          {pizza.map((item,index) =>
             item.img ? (
-              <div className="dishes" item={item}>
-                <img src={item.img} alt="" />
-                <div className="content">
-                  <div className="d1">
-                    <h3>{item.name}</h3>
-                    <span className="rating">
-                      {item.rating}
-                      <StarHalfIcon sx={{ fontSize: 19 }} />
-                    </span>
-                  </div>
-                  <div className="d2">
-                    <p>{item.ingridient.substring(0, 10)}</p>
-                    <p className="price">{item.price}.</p>
-                  </div>
-                  {/* <div className="order" style={{cursor:'pointer'}} onClick={()=>navigate('https://wa.me/c/919322538480')}>Order Now</div> */}
-                  {/* <Link
-                    className="order"
-                    style={{ cursor: "pointer" }}
-                    to="https://wa.me/c/919322538480"
-                  >
-                    Order Now
-                  </Link> */}
-                  <button
-                    className="order"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => cartObj(item)}
-                  >
-                    Order Now
-                  </button>
-                </div>
-              </div>
+              <Card item={item} index={index} />
             ) : (
               ""
             )
           )}
         </div>
       </section>
-      <section className="section2">
+      {/* <section className="section2">
         <h2>Top Dishes</h2>
         <div className="s2-down">
           {pizza.map((item, index) => (
-            <div className="dishes" key={index}>
-              <img src={item.img} alt="" />
-              <div className="content">
-                <div className="d1">
-                  <h3>{item.name}</h3>
-                  <span className="rating">
-                    {item.rating}
-                    <StarHalfIcon sx={{ fontSize: 19 }} />
-                  </span>
-                </div>
-                <div className="d2">
-                  <p>{item.ingridient.substring(0, 10)}</p>
-                  <p className="price">{item.price}.</p>
-                </div>
-                {/* <div className="order" style={{cursor:'pointer'}} onClick={()=>navigate('https://wa.me/c/919322538480')}>Order Now</div> */}
-                <Link
-                  className="order"
-                  style={{ cursor: "pointer" }}
-                  to="https://wa.me/c/919322538480"
-                >
-                  Order Now
-                </Link>
-              </div>
-            </div>
+            <Card item={item} index={index}/>
           ))}
         </div>
-      </section>
+      </section> */}
       <section className="call-delivery">
         {/* <div><img src={telephone} alt="" />
         <p className="delivery-text">Call On Delivary</p>

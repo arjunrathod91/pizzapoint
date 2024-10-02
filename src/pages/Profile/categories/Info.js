@@ -13,6 +13,7 @@ function Info() {
     <div className="info">
       {isMobile ? (<div onClick={()=>setRIghtSec(false)}><ArrowBackIcon/></div>):""}
       <div style={{padding:'20px'}}>
+      <div>User Details</div>
         <div className="item-sec">
           <label className="label">Name</label>
           <div className="item">Arjun Rathod</div>

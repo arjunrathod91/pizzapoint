@@ -12,7 +12,8 @@ import Cart from './pages/Cart/Cart'
 import Login from './pages/Profile/Login'
 import Signup from './pages/Profile/Signup'
 import Profile from './pages/Profile/Profile'
-import OrderDetails from './pages/Cart/OrderDetails'
+import PaymentMethod from './pages/Cart/PaymentMethod'
+import OrderPlaced from './pages/Cart/OrderPlaced'
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/profile' element={<Profile/>}/>
-        <Route path='/orderdetails' element={<OrderDetails/>}/>
+        <Route path='/paymentmethod' element={<PaymentMethod/>}/>
+        <Route path='/orderplaced' element={<OrderPlaced/>}/>
       </Routes>
       </BrowserRouter>
       </MyContextProvider>

@@ -1,3 +1,4 @@
+/*Admin*/
 .admin{
     background-color: rgb(255, 255, 255);
     height: 100vh;
@@ -9,12 +10,14 @@
 }
 .admin .left{
     height: 100%;
-    width: 20%;
+    display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: start;
     justify-content: start;
     padding: 20px 0;
     margin-top: 50px;
+    background-color: azure;
 
 }
 .left .column{
@@ -30,11 +33,11 @@
     font-weight: 500;
 }
 .admin .right{
+    flex: 4;
     width: 70%;
     height: 100%;
     padding-left:20px ;
     background-color: rgb(233, 233, 233);
-    position: relative;
 }
 .add-column{
     display: flex;
@@ -44,4 +47,65 @@
     gap: 20px;
     justify-content: start;
     background-color: rgb(255, 159, 159);
+}
+
+/*Order*/
+.orders-page{
+    height: 100%;
+    width: 100%;
+    padding: 20px 0;
+
+}
+.new-order{
+    height: 200px;
+    width: 90%;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+}
+.details-sec{
+    width: 100%;
+    display: flex;
+    flex: 1;
+    height: 70%;
+}
+.detail-box{
+    display: flex;
+    gap: 10px;
+}
+
+.btn-sec{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex: 1;
+    height: 30%;
+
+}
+
+.accept{
+    padding:10px 20px;
+    font-size: 18px;
+    color: white;
+    background-color: rgb(181, 37, 37);
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+.cancel{
+    padding:10px 20px;
+    font-size: 18px;
+    color: white;
+    background-color: rgb(40, 108, 20);
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+.acc-ord-box{
+    height: 100px;
+    width: 90%;
+    background-color: red;
+    border-radius: 5px;
 }

@@ -1,4 +1,4 @@
-const pizza = [
+const allItems = [
     {
         name: 'Classic Chicken Tikka Pizza [7 inches]',
         ingridient: 'Onion, tomato, chicken tikka and liquid cheese and mozzarella cheese.',
@@ -432,3 +432,5 @@ const pizza = [
 
 },
 ]
+
+export default allItems; 

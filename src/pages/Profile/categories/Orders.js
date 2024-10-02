@@ -19,6 +19,7 @@ function Orders() {
         ""
       )}
       <div style={{padding:'20px'}}>
+      <div>Recent Orders</div>
         {allorders.map((item, index) => (
           <>
             <div className="item-box" index={index}>

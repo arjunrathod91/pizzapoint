@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Context } from "../../context/Context";
 import Card from "../../components/Card/Card";
+import axios from 'axios';
 
 function Home() {
   const navigate = useNavigate();
@@ -484,6 +485,9 @@ function Home() {
 
   const [sliderImg,setSliderImg] = useState(imgSrc[0]);
   const [style, setStyle] = useState({});
+  const [activeIndex,setActiveIndex] = useState('0');
+  const [allItems,setAllItems] = useState([]);
+  
 
   const transition=(newImg)=>{
     setStyle({
@@ -500,6 +504,21 @@ function Home() {
       setStyle({ transform: 'translateX(0)', transition: 'none' }); // Reset position after changing image
     }, 400);
   }
+
+  useEffect(() => {
+    // Define the backend API endpoint
+    const fetchMenu = async () => {
+      try {
+        const response = await axios.get('https://pizzapointserver-1.onrender.com/allItems'); // Adjust the URL if necessary
+        setAllItems(response.data); // Update state with fetched data
+      } catch (err) {
+        console.error('Error fetching menu data:', err);
+        console.log(err)
+      }
+    };
+
+    fetchMenu(); // Invoke the fetch function
+  }, []);
   return (
     <div className="home">
       <div
@@ -512,9 +531,9 @@ function Home() {
         <div className="slider">
           <img src={sliderImg} style={style} />
           <div className="controls">
-            <div className="ball" onClick={()=>{transition(imgSrc[0])}}></div>
-            <div className="ball" onClick={()=>{transition(imgSrc[1])}}></div>
-            <div className="ball" onClick={()=>{transition(imgSrc[2])}}></div>
+            <div className={`ball ${activeIndex === '0' ? 'active' : ''}`} onClick={()=>{transition(imgSrc[0]);setActiveIndex('0')}}></div>
+            <div className={`ball ${activeIndex === '1' ? 'active' : ''}`} onClick={()=>{transition(imgSrc[1]);setActiveIndex('1')}}></div>
+            <div className={`ball ${activeIndex === '2' ? 'active' : ''}`} onClick={()=>{transition(imgSrc[2]);setActiveIndex('2')}}></div>
           </div>
           {/* <div className="s-left">
             <img src={''} alt="" />
@@ -556,7 +575,7 @@ function Home() {
       <section className="section2">
         <h2>BestSeller</h2>
         <div className="s2-down">
-          {pizza.map((item,index) =>
+          {allItems.map((item,index) =>
             item.img ? (
               <Card item={item} index={index} />
             ) : (

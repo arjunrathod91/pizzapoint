@@ -245,6 +245,10 @@ function Cart() {
               </div>
             </div>
           ))}
+          {/* <div>Add Ons</div>
+          <div>Pepsi</div> total + pepsi and obj + pepsi
+          <div>Cola</div>
+          <div>Cola</div> */}
           <button className="order-btn" onClick={orderNowBtn}>
             Order Now {cart.length == 0 ? 0 : total}
           </button>

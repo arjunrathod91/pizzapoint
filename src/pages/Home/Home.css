@@ -35,8 +35,11 @@
 .ball{
     height: 10px;
     width: 10px;
-    background-color: white;
+    background-color: rgba(215, 215, 215, 0.577);
     border-radius: 50%;
+}
+.active{
+    background-color: white;
 }
 .slider img{
     height: 100%;

@@ -21,7 +21,7 @@ function Orders() {
       <div style={{padding:'20px'}}>
       <div>Recent Orders</div>
         {allorders.map((item, index) => (
-          <>
+          <div style={{backgroundColor:'red'}}>
             <div className="item-box" index={index}>
               <div className="img-sec">
                 <img src={item.img} />
@@ -34,7 +34,7 @@ function Orders() {
                 <p>{item.date}</p>
               </div>
             </div>
-          </>
+          </div>
         ))}
       </div>
     </div>

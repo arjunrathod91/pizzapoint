@@ -395,7 +395,7 @@ const allItems = [
     rating: 4.4,
     price: '79',
     img: 'https://b.zmtcdn.com/data/dish_photos/09a/1b02791eaacf702d86906fa358e2d09a.jpg?fit=around|130:130&crop=130:130;*,*',
-    category:'french fries',
+    category:'fries',
     type:'non-veg',
     tag:'french fries'
 },
@@ -405,7 +405,7 @@ const allItems = [
     rating: 4.4,
     price: '89',
     img: 'https://b.zmtcdn.com/data/dish_photos/940/cbdaa46353677768aa4151cfe177e940.jpg?fit=around|130:130&crop=130:130;*,*',
-    category:'french fries',
+    category:'fries',
     type:'veg',
     tag:'french fries'
 },
@@ -415,7 +415,7 @@ const allItems = [
     rating: 4.4,
     price: '109',
     img: 'https://b.zmtcdn.com/data/dish_photos/3a1/e4e970bd181727ffbe25891472e223a1.jpg?fit=around|130:130&crop=130:130;*,*',
-    category:'french fries',
+    category:'fries',
     type:'non-veg',
     tag:'cheese french fries'
 
@@ -426,7 +426,7 @@ const allItems = [
     rating: 4.4,
     price: '119',
     img: 'https://b.zmtcdn.com/data/dish_photos/5a2/071b2a42ef343a52f8a22f960287d5a2.png?fit=around|130:130&crop=130:130;*,*',
-    category:'french fries',
+    category:'fries',
     type:'non-veg',
     tag:'french fries'
 

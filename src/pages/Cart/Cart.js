@@ -4,6 +4,7 @@ import { Context } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import logo from "../../Images/logo.png";
+import axios from "axios";
 
 function Cart() {
   const {
@@ -19,6 +20,8 @@ function Cart() {
     adminOrders,setAdminOrders,
     profileDetails,setProfileDetails
   } = useContext(Context);
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
 
@@ -52,7 +55,7 @@ function Cart() {
     }
   };
 
-  const orderNowBtn = () => {
+  const orderNowBtn = async () => {
     if (loggedIn) {
       if (total > 0) {
         const currentDate = new Date().toLocaleString("en-IN", {
@@ -70,6 +73,28 @@ function Cart() {
         localStorage.setItem("newOrder",JSON.stringify(latestOrder));
         const prevOrders = JSON.parse(localStorage.getItem("adminOrder")) || [];
         localStorage.setItem("adminOrder", JSON.stringify([...prevOrders, latestOrder]));
+
+
+
+        const userUpdate = {
+          username: user[0].username,
+          email: user[0].email,
+          password: user[0].password,
+          contact: user[0].contact,
+          address: user[0].address,
+          cart:cart,
+          order:cart, // Include the new item in the cart
+        };
+        console.log(userUpdate);
+        try {
+          const response = await axios.put(
+            "http://localhost:8000/userDetail",
+            userUpdate
+          );
+          console.log("Order updated successfully:", response.data);
+        } catch (error) {
+          console.log(error);
+        }
         // setNewOrder(latestOrder)
         // setAdminOrders((prevOrders) => [...prevOrders, newOrder])
         // console.log(newOrder)

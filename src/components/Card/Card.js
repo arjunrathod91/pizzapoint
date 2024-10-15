@@ -6,7 +6,7 @@ import "./Card.css";
 import axios from "axios";
 
 function Card({ item, index }) {
-  const { setCart, setTotal, cart } = useContext(Context);
+  const { setCart, setTotal, cart, allorders } = useContext(Context);
 
   const user = JSON.parse(localStorage.getItem("user"));
 

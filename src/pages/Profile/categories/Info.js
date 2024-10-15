@@ -8,6 +8,7 @@ function Info() {
   const { allorders, setAllOrders, rightSec, setRIghtSec } =
     useContext(Context);
   const isMobile = useMediaQuery("(max-width:600px)");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div className="info">
@@ -16,23 +17,23 @@ function Info() {
       <div>User Details</div>
         <div className="item-sec">
           <label className="label">Name</label>
-          <div className="item">Arjun Rathod</div>
+          <div className="item">{user[0].username}</div>
         </div>
         <div className="item-sec">
           <label className="label">Address</label>
-          <div className="item">Wadgaon Budrukh</div>
+          <div className="item">{user[0].address}</div>
         </div>
         <div className="item-sec">
           <label className="label">Mobile NO.</label>
-          <div className="item">+917350887544</div>
+          <div className="item">{user[0].contact}</div>
         </div>
         <div className="item-sec">
           <label className="label">Password</label>
-          <div className="item">ar885209</div>
+          <div className="item">{user[0].password}</div>
         </div>
         <div className="item-sec">
           <label className="label">Email Id</label>
-          <div className="item">ar885209@gmai.com</div>
+          <div className="item">{user[0].email}</div>
         </div>
       </div>
     </div>

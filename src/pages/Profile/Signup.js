@@ -22,27 +22,24 @@ function Signup() {
   const [address, setAddress] = useState();
 
   const handleBtn = () => {
-    // setProfileDetails({"username":username,
-    //   "email":email,
-    //   "password":password,
-    //   "contact":contact,
-    //   "address":address
-    // })
-
-    setTimeout(() => {
-      console.log(profileDetails)
+      const obj = {
+        "username":username,
+        "email":email,
+        "password":password,
+        "contact":contact,
+        "address":address
+      }
       axios
-        .post("http://localhost:8000/userDetail", profileDetails)
+        .post("https://pizzapointserver-1.onrender.com/userDetail", obj)
         .then((response) => {
           console.log(response.data);
-          alert("Signup Successfully!");
         })
         .catch((error) => {
           console.error("There was an error", error);
-          alert("Failed to sigup.");
+          alert("Failed to signup.");
         });
-    }, 0);
-    navigate("/profile");
+        alert("Signup Successfully!");
+        navigate("/profile");
   };
 
   return (

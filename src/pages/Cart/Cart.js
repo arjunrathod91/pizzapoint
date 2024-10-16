@@ -88,13 +88,45 @@ function Cart() {
         console.log(userUpdate);
         try {
           const response = await axios.put(
-            "http://localhost:8000/userDetail",
+            "https://pizzapointserver-1.onrender.com/userDetail",
             userUpdate
           );
           console.log("Order updated successfully:", response.data);
         } catch (error) {
           console.log(error);
         }
+
+        //post request 
+
+        const userOrder = {
+          username: user[0].username,
+          email: user[0].email,
+          password: user[0].password,
+          contact: user[0].contact,
+          address: user[0].address,
+          order:cart, // Include the new item in the cart
+        };
+        console.log(userOrder);
+        // try {
+        //   const response = await axios.post(
+        //     "http://localhost:8000/allOrders",
+        //     userOrder
+        //   );
+        //   console.log("User Orderd successfully:", response.data);
+        // } catch (error) {
+        //   console.log(error);
+        // }
+        axios
+        .post("https://pizzapointserver-1.onrender.com/allOrders", userOrder)
+        .then((response) => {
+          console.log("User Orderd successfully:", response.data);
+        })
+        .catch((error) => {
+          console.error("There was an error", error);
+          alert("Failed to signup.");
+        });
+
+
         // setNewOrder(latestOrder)
         // setAdminOrders((prevOrders) => [...prevOrders, newOrder])
         // console.log(newOrder)

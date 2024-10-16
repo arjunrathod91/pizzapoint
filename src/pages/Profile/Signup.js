@@ -22,7 +22,7 @@ function Signup() {
   const [address, setAddress] = useState();
 
   const handleBtn = () => {
-      const obj = {
+      const user = {
         "username":username,
         "email":email,
         "password":password,
@@ -30,7 +30,7 @@ function Signup() {
         "address":address
       }
       axios
-        .post("https://pizzapointserver-1.onrender.com/userDetail", obj)
+        .post("https://pizzapointserver-1.onrender.com/userDetail", user)
         .then((response) => {
           console.log(response.data);
         })

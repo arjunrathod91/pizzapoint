@@ -26,7 +26,7 @@ function Card({ item, index }) {
     console.log(userUpdate);
     try {
       const response = await axios.put(
-        "http://https://pizzapointserver-1.onrender.com/userDetail",
+        "https://pizzapointserver-1.onrender.com/userDetail",
         userUpdate
       );
       console.log("Cart updated successfully:", response.data);

@@ -17,31 +17,21 @@ function OrdersPage() {
 
   const [acceptedOrders, setAcceptedOrders] = useState([]);
 
-  const accept = async () => {
-    // setAcceptedOrders(prev=>[...prev,allorders])
-    // try {
-    //   const response = await axios.get("http://localhost:8000/allOrders"); // Adjust the URL if necessary
-    //   console.log(response.data); // Update state with fetched data
-    //   setAllOrders(response.data);
-    // } catch (err) {
-    //   console.error("Error fetching data:", err);
-    //   console.log(err);
-    // }
+  const accept = () => {
+    const fetch = async () => {
+      try {
+        const response = await axios.get("https://pizzapointserver-1.onrender.com/allOrders");
+        console.log(response.data); // Log the full response for clarity
+        setAllOrders(response.data); // Set the state with the whole response if needed
+      } catch (err) {
+        console.error("Error fetching data:", err.message); // Log specific error details
+      }
+    };
+    fetch();
   };
   const cancel = () => {};
 
   useEffect(()=>{
-    const fetch=async()=>{
-      try {
-        const response = await axios.get("https://pizzapointserver-1.onrender.com/allOrders"); // Adjust the URL if necessary
-        console.log(response.data[0]); // Update state with fetched data
-        setAllOrders(response.data[0]);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-        console.log(err);
-      }
-    }
-    fetch();
   },[])
 
   const option = () => {};
@@ -90,11 +80,11 @@ function OrdersPage() {
       </div>
       <div className="">
         <div>Accepted Orders</div>
-        {allorders.order.map((item, index) => (
+        {/* {allorders.order.map((item, index) => (
           <div className="acc-ord-box" key={index}>
             <p>{item.username}</p>
           </div>
-        ))}
+        ))} */}
         <div className="acc-ord-box"></div>
       </div>
     </div>

@@ -16,19 +16,25 @@ function Login({}) {
   const handleBtn = async ()=>{
     const fetchMenu = async () => {
       try {
-        const response = await axios.get('https://pizzapointserver-1.onrender.com/userDetail'); // Adjust the URL if necessary
-        const filterArray = response.data.filter(user=>user.email === inputEmail && user.password === inputPassword)
-        if(filterArray){
-          localStorage.setItem("user",JSON.stringify(filterArray));
-          navigate('/profile')
+        // Corrected the URL with protocol
+        const response = await axios.post('https://pizzapointserver-1.onrender.com/login', {
+          email: inputEmail, // Use the correct keys
+          password: inputPassword
+        });
+    
+        if (response.data.success) {
+          // If credentials match, navigate to /profile
+          navigate('/profile');
+        } else {
+          // If credentials do not match, display an error message
+          alert('Invalid email or password');
         }
-        // console.log(filterArray);
-        // if(filterArray.email === inputEmail && filterArray.password === inputPassword){
-        //   localStorage.setItem("user",filterArray)
-        // }
+        
+        const userData = response.data;
+        console.log(userData);
+    
       } catch (err) {
         console.error('Error fetching menu data:', err);
-        console.log(err)
       }
     };
 

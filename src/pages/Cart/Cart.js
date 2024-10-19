@@ -300,6 +300,7 @@ function Cart() {
                   <DeleteIcon />
                 </div>
               </div>
+              
             </div>
           ))}
           {/* <div>Add Ons</div>

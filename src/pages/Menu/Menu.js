@@ -16,6 +16,10 @@ function Menu() {
 
   useEffect(() => {}, []);
 
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   
 
   return (
@@ -24,7 +28,10 @@ function Menu() {
             <p onClick={press}>Menu</p>
         </div> */}
       <div>
-        <h3>{category}</h3>
+        <div style={{display:'flex',fontSize:'20px'}}>
+        <h3>{capitalizeFirstLetter(category)}</h3>
+        </div>
+        
         <div className="tank">
           {categoryItems.map((item,index) => (
             <Card item={item} index={index}/>

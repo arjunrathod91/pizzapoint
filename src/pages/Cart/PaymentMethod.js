@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../../Images/logo.png";
+import { Context } from "../../context/Context";
 
 function PaymentMethod() {
-  const [paymentType,setPaymentType] = useState('');
+  const [paymentType, setPaymentType] = useState("");
   const billObj = JSON.parse(localStorage.getItem("newOrder")) || [];
+  const {cart,allorders} = useContext(Context);
   const navigate = useNavigate();
 
   const handlePayment = () => {
@@ -18,7 +20,7 @@ function PaymentMethod() {
       image: `${logo}`, // Optional: Add your logo URL
       handler: function (response) {
         alert(`Payment successful: ${response.razorpay_payment_id}`);
-        navigate('/orderplaced');
+        navigate("/orderplaced");
       },
       prefill: {
         name: "Arjun", //{username}
@@ -37,28 +39,60 @@ function PaymentMethod() {
     rzp.open();
   };
 
-  const payBill=()=>{
-    if(paymentType === "Online"){
+  const payBill = () => {
+    if (paymentType === "Online") {
       billObj["paymentType"] = paymentType;
       handlePayment();
+    } else {
+      navigate("/orderplaced");
     }
-    else{
-      navigate('/orderplaced');
-    }
-  }
+  };
 
   return (
-    <div>
-      <div>Total Bill {billObj.total}</div>
-      <div>
-     <input type='radio' name='r1' style={{cursor:'pointer'}} onClick={()=>setPaymentType('COD')}/> Cash On Delivery
-     </div>
-     <div>
-     <input type='radio' name='r1' style={{cursor:'pointer'}} onClick={()=>setPaymentType('Online')} />Pay Online
-     </div>
-     <button style={{cursor:'pointer'}} onClick={payBill}>Place a Order</button>
+    <div className="payment-method">
+      <div
+        className="payment-box"
+        style={{ display: "flex", justifyContent: "start" }}
+      >
+        <div>Total Bill <span style={{fontWeight:'500'}}>{billObj.total}</span></div>
+        {allorders.map((item, index) => (
+          <div>
+            <div className="item-box" index={index}>
+              <div className="img-sec">
+                <img src={item.img} />
+              </div>
+              <div className="info-sec">
+                <label>{item.name}</label>
+                <p style={{fontSize:'14px'}}>{item.ingridient}</p>
+                <label>₹{item.price}</label>
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className="payment-type">
+          <input
+            type="radio"
+            name="r1"
+            style={{ cursor: "pointer" }}
+            onClick={() => setPaymentType("COD")}
+          />{" "}
+          Cash On Delivery
+        </div>
+        <div className="payment-type">
+          <input
+            type="radio"
+            name="r1"
+            style={{ cursor: "pointer" }}
+            onClick={() => setPaymentType("Online")}
+          />
+          Pay Online
+        </div>
+        <div className="continew" onClick={payBill}>
+          Place a Order
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default PaymentMethod
+export default PaymentMethod;

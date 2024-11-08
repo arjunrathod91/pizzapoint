@@ -59,8 +59,8 @@ function PaymentMethod() {
         className="payment-box"
         style={{ display: "flex", justifyContent: "start" }}
       >
-        <div>
-          Total Bill <span style={{ fontWeight: "500" }}>{billObj.total}</span>
+        <div className="bill">
+          Total Bill : ₹<span style={{ fontWeight: "500" }}>{billObj.total}</span>
         </div>
         {allorders.map((item, index) => (
           <div>

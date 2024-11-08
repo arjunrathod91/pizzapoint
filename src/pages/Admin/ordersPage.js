@@ -16,6 +16,7 @@ function OrdersPage() {
   };
 
   const [acceptedOrders, setAcceptedOrders] = useState([]);
+  const [newOrders,setNewOrders] = useState({});
 
   const accept = () => {
     const fetch = async () => {
@@ -29,9 +30,23 @@ function OrdersPage() {
     };
     fetch();
   };
+
+  const newOrder = () => {
+    const fetch = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/newOrder");
+        console.log(response.data[0]); // Log the full response for clarity
+        setNewOrders(response.data[0]); // Set the state with the whole response if needed
+      } catch (err) {
+        console.error("Error fetching data:", err.message); // Log specific error details
+      }
+    };
+    fetch();
+  };
   const cancel = () => {};
 
   useEffect(()=>{
+    newOrder();
   },[])
 
   const option = () => {};

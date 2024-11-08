@@ -87,7 +87,7 @@
     padding:10px 20px;
     font-size: 18px;
     color: white;
-    background-color: rgb(181, 37, 37);
+    background-color: rgb(40, 108, 20);
     font-weight: 500;
     border-radius: 5px;
     border: none;
@@ -96,8 +96,8 @@
 .cancel{
     padding:10px 20px;
     font-size: 18px;
+    background-color: rgb(181, 37, 37);
     color: white;
-    background-color: rgb(40, 108, 20);
     font-weight: 500;
     border-radius: 5px;
     border: none;

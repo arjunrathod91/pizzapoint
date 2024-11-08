@@ -117,7 +117,7 @@ function Cart() {
         //   console.log(error);
         // }
         axios
-        .post("https://pizzapointserver-1.onrender.com/allOrders", userOrder)
+        .post("http://localhost:8000/newOrder", userOrder)
         .then((response) => {
           console.log("User Orderd successfully:", response.data);
         })

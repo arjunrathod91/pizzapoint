@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../Images/logo.png";
 import { Context } from "../../context/Context";
+import axios from "axios";
 
 function PaymentMethod() {
   const [paymentType, setPaymentType] = useState("");
   const billObj = JSON.parse(localStorage.getItem("newOrder")) || [];
-  const {cart,allorders} = useContext(Context);
+  const { cart, allorders } = useContext(Context);
   const navigate = useNavigate();
 
   const handlePayment = () => {
@@ -39,6 +40,10 @@ function PaymentMethod() {
     rzp.open();
   };
 
+  const newOrder=()=>{
+
+  }
+
   const payBill = () => {
     if (paymentType === "Online") {
       billObj["paymentType"] = paymentType;
@@ -54,7 +59,9 @@ function PaymentMethod() {
         className="payment-box"
         style={{ display: "flex", justifyContent: "start" }}
       >
-        <div>Total Bill <span style={{fontWeight:'500'}}>{billObj.total}</span></div>
+        <div>
+          Total Bill <span style={{ fontWeight: "500" }}>{billObj.total}</span>
+        </div>
         {allorders.map((item, index) => (
           <div>
             <div className="item-box" index={index}>
@@ -63,32 +70,34 @@ function PaymentMethod() {
               </div>
               <div className="info-sec">
                 <label>{item.name}</label>
-                <p style={{fontSize:'14px'}}>{item.ingridient}</p>
+                <p style={{ fontSize: "14px" }}>{item.ingridient}</p>
                 <label>₹{item.price}</label>
               </div>
             </div>
           </div>
         ))}
-        <div className="payment-type">
-          <input
-            type="radio"
-            name="r1"
-            style={{ cursor: "pointer" }}
-            onClick={() => setPaymentType("COD")}
-          />{" "}
-          Cash On Delivery
-        </div>
-        <div className="payment-type">
-          <input
-            type="radio"
-            name="r1"
-            style={{ cursor: "pointer" }}
-            onClick={() => setPaymentType("Online")}
-          />
-          Pay Online
-        </div>
-        <div className="continew" onClick={payBill}>
-          Place a Order
+        <div className="ptype">
+          <div className="payment-type">
+            <input
+              type="radio"
+              name="r1"
+              style={{ cursor: "pointer" }}
+              onClick={() => setPaymentType("COD")}
+            />{" "}
+            Cash On Delivery
+          </div>
+          <div className="payment-type">
+            <input
+              type="radio"
+              name="r1"
+              style={{ cursor: "pointer" }}
+              onClick={() => setPaymentType("Online")}
+            />
+            Pay Online
+          </div>
+          <div className="continew" onClick={payBill}>
+            Place a Order
+          </div>
         </div>
       </div>
     </div>

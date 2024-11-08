@@ -520,10 +520,11 @@ function Home() {
     fetchMenu(); // Invoke the fetch function
   }, []);
 
-  const categoryClick=()=>{
-    setTimeout(()=>{
-      localStorage.setItem("category",category)
-    },3000)
+  const categoryClick=(item)=>{
+    // setTimeout(()=>{
+    //   localStorage.setItem("category",category)
+    // },3000)
+    localStorage.setItem("category",item);
   }
   return (
     <div className="home">
@@ -556,23 +557,23 @@ function Home() {
           <h2>Dishes</h2>
         </div>
         <div className="s1-down">
-          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('pizza');navigate('/menu');categoryClick()}}>
+          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('pizza');navigate('/menu');categoryClick("pizza")}}>
             <img src="https://static.vecteezy.com/system/resources/previews/021/311/747/non_2x/pizza-transparent-background-png.png" alt="" />
             <p>Pizza</p>
           </div>
-          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('burger');navigate('/menu');categoryClick()}}>
+          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('burger');navigate('/menu');categoryClick("burger")}}>
             <img src={burger} alt="" />
             <p>Burger</p>
           </div>
-          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('fries');navigate('/menu');categoryClick()}}>
+          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('fries');navigate('/menu');categoryClick("fries")}}>
             <img src={fries} alt="" />
             <p>Fries</p>
           </div>
-          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('momos');navigate('/menu');categoryClick()}}>
+          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('momos');navigate('/menu');categoryClick("momos")}}>
             <img src={momos} alt="" />
             <p>Momos</p>
           </div>
-          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('sandwich');navigate('/menu');categoryClick()}}>
+          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('sandwich');navigate('/menu');categoryClick("sandwitch")}}>
             <img src={sandwitch} alt="" />
             <p>Sandwitch</p>
           </div>

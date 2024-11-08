@@ -107,7 +107,6 @@ label{
     height: 100vh;
     width: 100vw;
     background-color: rgba(243, 243, 243, 0.868);
-    overflow-y: auto;
 
 }
 .payment-box{
@@ -122,15 +121,33 @@ label{
     background-color: rgb(255, 255, 255);
     padding: 20px;
 }
-.continew{
+.ptype{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+.continew{
+    background-color: rgb(247, 96, 119);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    border-radius: 5px;
     padding: 10px;
-    background-color: rgb(255, 218, 218);
-    width: 90%;
+    color: white;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    width: 100%;
+    cursor: pointer;
 }
 .payment-type{
     padding: 10px;
-    width: 80%;
+    width: 100%;
     border: 1px solid gray;
     border-radius: 10px;
 }
@@ -143,6 +160,9 @@ label{
     .cart-box{
         width: 100%;
         padding: 0;
+    }
+    .payment-box{
+        width: 100%;
     }
     .img-sec{
         display: flex;

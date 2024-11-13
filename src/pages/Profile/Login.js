@@ -16,17 +16,14 @@ function Login({}) {
   const handleBtn = async ()=>{
     const fetchMenu = async () => {
       try {
-        // Corrected the URL with protocol
         const response = await axios.post('https://pizzapointserver-1.onrender.com/login', {
-          email: inputEmail, // Use the correct keys
+          email: inputEmail,
           password: inputPassword
         });
     
         if (response.data.success) {
-          // If credentials match, navigate to /profile
           navigate('/profile');
         } else {
-          // If credentials do not match, display an error message
           alert('Invalid email or password');
         }
         
@@ -39,27 +36,6 @@ function Login({}) {
     };
 
     fetchMenu();
-
-    setTimeout(() => {
-      // console.log(inputEmail,inputPassword);
-      
-      // axios
-      //   .post("https://pizzapointserver-1.onrender/login",inputEmail,inputPassword)
-      //   .then((response) => {
-      //     console.log(response.data);
-      //     alert("Signup Successfully!");
-      //   })
-      //   .catch((error) => {
-      //     console.error("There was an error", error);
-      //     alert("Failed to sigup.");
-      //   });
-    }, 0);
-    // if(profileDetails.email === inputEmail && profileDetails.password === inputPassword){
-    //   navigate('/profile')
-    // }
-    // else{
-    //   alert('invalid')
-    // }
   }
   return (
     <div className="login">

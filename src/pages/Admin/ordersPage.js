@@ -22,8 +22,9 @@ function OrdersPage() {
   const newOrder = () => {
     const fetch = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/newOrder");
-        console.log(response.data[0]); // Log the full response for clarity
+        const response = await axios.get(
+          "https://pizzapointserver-1.onrender.com/newOrder"
+        );
         setNewOrders(response.data[0]); // Set the state with the whole response if needed
       } catch (err) {
         console.error("Error fetching data:", err.message); // Log specific error details
@@ -32,39 +33,66 @@ function OrdersPage() {
     fetch();
   };
 
-  const accept = () => {
-    const fetchMenu = async () => {
+  const latestOrder = () => {
+    const fetch = async () => {
       try {
-        // Corrected the URL with protocol
-        const response = await axios.post(
-          "http://localhost:8000/allOrders",
-          newOrders
+        const response = await axios.get(
+          "https://pizzapointserver-1.onrender.com/allOrders"
         );
-        // const userData = response.data;
-        console.log(response.data);
-        setAllOrders(response.data)
+        setAllOrders(response.data);
       } catch (err) {
-        console.error("Error fetching menu data:", err);
+        console.error("Error fetching data:", err.message);
       }
     };
-
-    fetchMenu();
-    // setNewOrders({});
-    // console.log(newOrders.order)
+    fetch();
   };
-  const cancel=()=>{
-    setNewOrders({})
-  }
+
+  const accept = async () => {
+    axios
+    .post("https://pizzapointserver-1.onrender.com/allOrders", newOrders)
+    .then((response) => {
+      console.log("Response:", response.data); // Log the response data
+      setNewOrders({})
+    })
+    .catch((error) => {
+      console.error("There was an error:", error); // Log the entire error
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("Request made but no response received:", error.request);
+      } else {
+        console.error("Error setting up the request:", error.message);
+      }
+    });
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:8000/allOrders",
+    //     newOrders
+    //   );
+    //   console.log("tan tana tan:", response.data);
+    //   setNewOrders({});
+    //   console.log(newOrders)
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+  const cancel = () => {
+    latestOrder();
+  };
   // const cancel = () => {};
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true); // Start loading
       await newOrder(); // Fetch your data
+      await latestOrder();
       setLoading(false); // Stop loading
     }
     newOrder();
-  }, []);
+    latestOrder();
+  }, [newOrders, allorders]);
 
   const option = () => {};
 
@@ -78,121 +106,187 @@ function OrdersPage() {
         ""
       )}
       <h1>Orders</h1>
-      {newOrders.order ? (<div className="new-order">
-        <div className="details-sec">
-          <div style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}>
-            Orderd by {newOrders.username}
-          </div>
-          <div className="user-order">
-            {newOrders.order
-              ? newOrders.order.map((item, index) => (
-                  <div
-                    className="order-item"
-                    key={index}
-                    style={{ fontWeight: "500" }}
-                  >
-                    <div>
-                      {item.type == "veg" ? (
-                        <>
-                          <img
-                            className="item-type-png"
-                            src="https://clipground.com/images/veg-logo-png-6.png"
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <img
-                            className="item-type-png"
-                            src="https://www.pngkey.com/png/full/245-2459071_non-veg-icon-non-veg-symbol-png.png"
-                          />
-                        </>
-                      )}
-                      {item.quantity} x {item.name}
+      {newOrders && newOrders.order ? (<div className="new-order">
+          <div className="details-sec">
+            <div style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}>
+              Orderd by {newOrders.username}
+            </div>
+            <div className="user-order">
+              {newOrders.order.map((item, index) => (
+                    <div
+                      className="order-item"
+                      key={index}
+                      style={{ fontWeight: "500" }}
+                    >
+                      <div>
+                        {item.type == "veg" ? (
+                          <>
+                            <img
+                              className="item-type-png"
+                              src="https://clipground.com/images/veg-logo-png-6.png"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <img
+                              className="item-type-png"
+                              src="https://www.pngkey.com/png/full/245-2459071_non-veg-icon-non-veg-symbol-png.png"
+                            />
+                          </>
+                        )}
+                        {item.quantity} x {item.name}
+                      </div>
+                      <div>₹{item.price}</div>
                     </div>
-                    <div>₹{item.price}</div>
-                  </div>
-                ))
-              : "NO Order Yet"}
-            <div
-              style={{
-                width: "100%",
-                borderBottom: "1px solid rgb(209, 209, 209)",
-                margin: "10px 0",
-              }}
-            ></div>
-            <div className="order-item">
-              <div>
-                Total Bill <span style={{ color: "red" }}>Paid</span>
+                  ))}
+              <div
+                style={{
+                  width: "100%",
+                  borderBottom: "1px solid rgb(209, 209, 209)",
+                  margin: "10px 0",
+                }}
+              ></div>
+              <div className="order-item">
+                <div>
+                  Total Bill <span style={{ color: "red" }}>Paid</span>
+                </div>
+                <div>200</div>
               </div>
-              <div>200</div>
+              <div className="btn-sec">
+                <button className="accept" onClick={accept}>
+                  Accept
+                </button>
+                <button className="cancel" onClick={cancel}>
+                  Cancel
+                </button>
+              </div>
             </div>
-            <div className="btn-sec">
-              <button className="accept" onClick={accept}>
-                Accept
-              </button>
-              <button className="cancel" onClick={cancel}>
-                Cancel
-              </button>
-            </div>
+            <div className=""></div>
           </div>
-          <div className=""></div>
+          <div></div>
+        </div>) : 'no data'}
+      {/* {newOrders.order ? (
+        <div className="new-order">
+          <div className="details-sec">
+            <div style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}>
+              Orderd by {newOrders.username}
+            </div>
+            <div className="user-order">
+              {newOrders.order
+                ? newOrders.order.map((item, index) => (
+                    <div
+                      className="order-item"
+                      key={index}
+                      style={{ fontWeight: "500" }}
+                    >
+                      <div>
+                        {item.type == "veg" ? (
+                          <>
+                            <img
+                              className="item-type-png"
+                              src="https://clipground.com/images/veg-logo-png-6.png"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <img
+                              className="item-type-png"
+                              src="https://www.pngkey.com/png/full/245-2459071_non-veg-icon-non-veg-symbol-png.png"
+                            />
+                          </>
+                        )}
+                        {item.quantity} x {item.name}
+                      </div>
+                      <div>₹{item.price}</div>
+                    </div>
+                  ))
+                : "NO Order Yet"}
+              <div
+                style={{
+                  width: "100%",
+                  borderBottom: "1px solid rgb(209, 209, 209)",
+                  margin: "10px 0",
+                }}
+              ></div>
+              <div className="order-item">
+                <div>
+                  Total Bill <span style={{ color: "red" }}>Paid</span>
+                </div>
+                <div>200</div>
+              </div>
+              <div className="btn-sec">
+                <button className="accept" onClick={accept}>
+                  Accept
+                </button>
+                <button className="cancel" onClick={cancel}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+            <div className=""></div>
+          </div>
+          <div></div>
         </div>
-        <div></div>
-      </div>) : "No order Yet"}
+      ) : (
+        "No order Yet"
+      )} */}
       <div>Accepted Orders</div>
       <div className="all-order-sec">
-          {newOrders.order ? newOrders.order.map((item, index) => (
-          <div className="acc-ord-box" key={index}>
-             <div style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}>
-            Orderd by {newOrders.username}
-          </div>
-          <div className="user-order">
-            {newOrders.order
-              ? newOrders.order.map((item, index) => (
+        {allorders
+          ? allorders.map((item, index) => (
+              <div className="acc-ord-box" key={index}>
+                <div
+                  style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}
+                >
+                  Orderd by {allorders.username}
+                </div>
+                <div className="user-order">
+                  {allorders
+                    ? item.order.map((item, index) => (
+                        <div
+                          className="order-item"
+                          key={index}
+                          style={{ fontWeight: "500" }}
+                        >
+                          <div>
+                            {item.type == "veg" ? (
+                              <>
+                                <img
+                                  className="item-type-png"
+                                  src="https://clipground.com/images/veg-logo-png-6.png"
+                                />
+                              </>
+                            ) : (
+                              <>
+                                <img
+                                  className="item-type-png"
+                                  src="https://www.pngkey.com/png/full/245-2459071_non-veg-icon-non-veg-symbol-png.png"
+                                />
+                              </>
+                            )}
+                            {item.quantity} x {item.name}
+                          </div>
+                          <div>₹{item.price}</div>
+                        </div>
+                      ))
+                    : "NO Order Yet"}
                   <div
-                    className="order-item"
-                    key={index}
-                    style={{ fontWeight: "500" }}
-                  >
+                    style={{
+                      width: "100%",
+                      borderBottom: "1px solid rgb(209, 209, 209)",
+                      margin: "10px 0",
+                    }}
+                  ></div>
+                  <div className="order-item">
                     <div>
-                      {item.type == "veg" ? (
-                        <>
-                          <img
-                            className="item-type-png"
-                            src="https://clipground.com/images/veg-logo-png-6.png"
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <img
-                            className="item-type-png"
-                            src="https://www.pngkey.com/png/full/245-2459071_non-veg-icon-non-veg-symbol-png.png"
-                          />
-                        </>
-                      )}
-                      {item.quantity} x {item.name}
+                      Total Bill <span style={{ color: "red" }}>Paid</span>
                     </div>
-                    <div>₹{item.price}</div>
+                    <div>200</div>
                   </div>
-                ))
-              : "NO Order Yet"}
-            <div
-              style={{
-                width: "100%",
-                borderBottom: "1px solid rgb(209, 209, 209)",
-                margin: "10px 0",
-              }}
-            ></div>
-            <div className="order-item">
-              <div>
-                Total Bill <span style={{ color: "red" }}>Paid</span>
+                </div>
               </div>
-              <div>200</div>
-            </div>
-          </div>
-          </div>
-        )) : ''}
-        {/* <div className="acc-ord-box"></div> */}
+            ))
+          : ""}
       </div>
     </div>
   );

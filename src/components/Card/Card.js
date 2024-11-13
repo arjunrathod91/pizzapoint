@@ -36,8 +36,8 @@ function Card({ item, index }) {
     setTotal((prevTotal) => prevTotal + Number(item.price));
   };
   return (
-    <div className="dishes" item={item} index={index}>
-      <img src={item.img} alt="" />
+    <div className="dishes" item={item} key={index} index={index}>
+      <img src={item.img ? item.img : ''} alt="" />
       <div className="content">
         <div className="d1">
           <h3>{item.name}</h3>
@@ -50,14 +50,6 @@ function Card({ item, index }) {
           <p>{item.ingridient.substring(0, 10)}</p>
           <p className="price">₹{item.price}</p>
         </div>
-        {/* <div className="order" style={{cursor:'pointer'}} onClick={()=>navigate('https://wa.me/c/919322538480')}>Order Now</div> */}
-        {/* <Link
-                    className="order"
-                    style={{ cursor: "pointer" }}
-                    to="https://wa.me/c/919322538480"
-                  >
-                    Order Now
-                  </Link> */}
         <button
           className="order"
           style={{ cursor: "pointer" }}

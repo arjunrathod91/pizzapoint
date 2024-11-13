@@ -16,9 +16,12 @@ function Cart() {
     setLoggedIn,
     allorders,
     setAllOrders,
-    newOrder,setNewOrder,
-    adminOrders,setAdminOrders,
-    profileDetails,setProfileDetails
+    newOrder,
+    setNewOrder,
+    adminOrders,
+    setAdminOrders,
+    profileDetails,
+    setProfileDetails,
   } = useContext(Context);
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -70,11 +73,12 @@ function Cart() {
         const latestOrder = profileDetails;
         latestOrder["latestOrder"] = cartWithDate;
         latestOrder["total"] = total;
-        localStorage.setItem("newOrder",JSON.stringify(latestOrder));
+        localStorage.setItem("newOrder", JSON.stringify(latestOrder));
         const prevOrders = JSON.parse(localStorage.getItem("adminOrder")) || [];
-        localStorage.setItem("adminOrder", JSON.stringify([...prevOrders, latestOrder]));
-
-
+        localStorage.setItem(
+          "adminOrder",
+          JSON.stringify([...prevOrders, latestOrder])
+        );
 
         const userUpdate = {
           username: user[0].username,
@@ -82,62 +86,48 @@ function Cart() {
           password: user[0].password,
           contact: user[0].contact,
           address: user[0].address,
-          cart:cart,
-          order:cart, // Include the new item in the cart
+          cart: cart,
+          order: cart,
         };
-        console.log(userUpdate);
-        try {
-          const response = await axios.put(
-            "https://pizzapointserver-1.onrender.com/userDetail",
-            userUpdate
-          );
-          console.log("Order updated successfully:", response.data);
-        } catch (error) {
-          console.log(error);
-        }
-
-        //post request 
-
         const userOrder = {
           username: user[0].username,
           email: user[0].email,
           password: user[0].password,
           contact: user[0].contact,
           address: user[0].address,
-          order:cart, // Include the new item in the cart
+          order: cart,
         };
-        console.log(userOrder);
-        // try {
-        //   const response = await axios.post(
-        //     "http://localhost:8000/allOrders",
-        //     userOrder
-        //   );
-        //   console.log("User Orderd successfully:", response.data);
-        // } catch (error) {
-        //   console.log(error);
-        // }
-        axios
-        .post("http://localhost:8000/newOrder", userOrder)
-        .then((response) => {
-          console.log("User Orderd successfully:", response.data);
-        })
-        .catch((error) => {
-          console.error("There was an error", error);
-          alert("Failed to signup.");
-        });
+        try {
+          const response1 = await axios.put(
+            "https://pizzapointserver-1.onrender.com/userDetail",
+            userUpdate
+          );
+          navigate("/paymentmethod");
+          setCart("");
+          console.log("Order updated successfully:", response1.data);
+        } catch (error) {
+          console.log(error);
+        }
 
+        try {
+          const response = await axios.post(
+            "https://pizzapointserver-1.onrender.com/newOrder",
+            userOrder
+          );
+          console.log("the data of user sent successfully:", response.data);
+        } catch (error) {
+          console.log(error);
+        }
 
         // setNewOrder(latestOrder)
         // setAdminOrders((prevOrders) => [...prevOrders, newOrder])
         // console.log(newOrder)
         // console.log(adminOrders)
         // const latestOrder = newOrder.map((item)=>{
-        //   //wanted to add user detail like name and 
+        //   //wanted to add user detail like name and
         // })
         // setAdminOrders((prevOrders) => [...prevOrders, ...latestOrder])
         // handlePayment();
-        navigate("/paymentmethod");
-        setCart("");
       }
     } else {
       navigate("/profile");
@@ -210,13 +200,12 @@ function Cart() {
     // category: "sandwich",
     // type: "chicken",
     // tag: "chicken sandwich",
-    
 
     //info to the owner
     //name
     //contact no
     //email
-    //his order list 
+    //his order list
     <div className="cart">
       {cart.length == 0 ? (
         <div
@@ -300,7 +289,6 @@ function Cart() {
                   <DeleteIcon />
                 </div>
               </div>
-              
             </div>
           ))}
           {/* <div>Add Ons</div>

@@ -25,9 +25,9 @@ function OrdersPage() {
         const response = await axios.get(
           "https://pizzapointserver-1.onrender.com/newOrder"
         );
-        setNewOrders(response.data[0]); // Set the state with the whole response if needed
+        setNewOrders(response.data[[response.data.length - 1]]);
       } catch (err) {
-        console.error("Error fetching data:", err.message); // Log specific error details
+        console.error("Error fetching data:", err.message);
       }
     };
     fetch();
@@ -49,37 +49,38 @@ function OrdersPage() {
 
   const accept = async () => {
     axios
-    .post("https://pizzapointserver-1.onrender.com/allOrders", newOrders)
-    .then((response) => {
-      console.log("Response:", response.data); // Log the response data
-      setNewOrders({})
-    })
-    .catch((error) => {
-      console.error("There was an error:", error); // Log the entire error
-      if (error.response) {
-        console.error("Response data:", error.response.data);
-        console.error("Response status:", error.response.status);
-        console.error("Response headers:", error.response.headers);
-      } else if (error.request) {
-        console.error("Request made but no response received:", error.request);
-      } else {
-        console.error("Error setting up the request:", error.message);
-      }
-    });
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:8000/allOrders",
-    //     newOrders
-    //   );
-    //   console.log("tan tana tan:", response.data);
-    //   setNewOrders({});
-    //   console.log(newOrders)
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      .post("https://pizzapointserver-1.onrender.com/allOrders", newOrders)
+      .then((response) => {
+        console.log("Response:", response.data); // Log the response data
+      })
+      .catch((error) => {
+        console.error("There was an error:", error); // Log the entire error
+        if (error.response) {
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
+          console.error("Response headers:", error.response.headers);
+        } else if (error.request) {
+          console.error(
+            "Request made but no response received:",
+            error.request
+          );
+        } else {
+          console.error("Error setting up the request:", error.message);
+        }
+      });
+    cancel();
   };
   const cancel = () => {
-    latestOrder();
+    axios
+      .delete("https://localhost:8000/newOrder", {
+        data: { id: newOrders._id }, // pass the order ID in the body
+      })
+      .then((response) => {
+        console.log("Order deleted:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error deleting order:", error);
+      });
   };
   // const cancel = () => {};
 
@@ -105,102 +106,41 @@ function OrdersPage() {
       ) : (
         ""
       )}
-      <h1>Orders</h1>
-      {newOrders && newOrders.order ? (<div className="new-order">
+      {newOrders && newOrders.order ? (
+        <div className="new-order">
+          <h1>Orders</h1>
           <div className="details-sec">
             <div style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}>
               Orderd by {newOrders.username}
             </div>
             <div className="user-order">
               {newOrders.order.map((item, index) => (
-                    <div
-                      className="order-item"
-                      key={index}
-                      style={{ fontWeight: "500" }}
-                    >
-                      <div>
-                        {item.type == "veg" ? (
-                          <>
-                            <img
-                              className="item-type-png"
-                              src="https://clipground.com/images/veg-logo-png-6.png"
-                            />
-                          </>
-                        ) : (
-                          <>
-                            <img
-                              className="item-type-png"
-                              src="https://www.pngkey.com/png/full/245-2459071_non-veg-icon-non-veg-symbol-png.png"
-                            />
-                          </>
-                        )}
-                        {item.quantity} x {item.name}
-                      </div>
-                      <div>₹{item.price}</div>
-                    </div>
-                  ))}
-              <div
-                style={{
-                  width: "100%",
-                  borderBottom: "1px solid rgb(209, 209, 209)",
-                  margin: "10px 0",
-                }}
-              ></div>
-              <div className="order-item">
-                <div>
-                  Total Bill <span style={{ color: "red" }}>Paid</span>
+                <div
+                  className="order-item"
+                  key={index}
+                  style={{ fontWeight: "500" }}
+                >
+                  <div>
+                    {item.type == "veg" ? (
+                      <>
+                        <img
+                          className="item-type-png"
+                          src="https://clipground.com/images/veg-logo-png-6.png"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <img
+                          className="item-type-png"
+                          src="https://www.pngkey.com/png/full/245-2459071_non-veg-icon-non-veg-symbol-png.png"
+                        />
+                      </>
+                    )}
+                    {item.quantity} x {item.name}
+                  </div>
+                  <div>₹{item.price}</div>
                 </div>
-                <div>200</div>
-              </div>
-              <div className="btn-sec">
-                <button className="accept" onClick={accept}>
-                  Accept
-                </button>
-                <button className="cancel" onClick={cancel}>
-                  Cancel
-                </button>
-              </div>
-            </div>
-            <div className=""></div>
-          </div>
-          <div></div>
-        </div>) : 'no data'}
-      {/* {newOrders.order ? (
-        <div className="new-order">
-          <div className="details-sec">
-            <div style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}>
-              Orderd by {newOrders.username}
-            </div>
-            <div className="user-order">
-              {newOrders.order
-                ? newOrders.order.map((item, index) => (
-                    <div
-                      className="order-item"
-                      key={index}
-                      style={{ fontWeight: "500" }}
-                    >
-                      <div>
-                        {item.type == "veg" ? (
-                          <>
-                            <img
-                              className="item-type-png"
-                              src="https://clipground.com/images/veg-logo-png-6.png"
-                            />
-                          </>
-                        ) : (
-                          <>
-                            <img
-                              className="item-type-png"
-                              src="https://www.pngkey.com/png/full/245-2459071_non-veg-icon-non-veg-symbol-png.png"
-                            />
-                          </>
-                        )}
-                        {item.quantity} x {item.name}
-                      </div>
-                      <div>₹{item.price}</div>
-                    </div>
-                  ))
-                : "NO Order Yet"}
+              ))}
               <div
                 style={{
                   width: "100%",
@@ -228,9 +168,9 @@ function OrdersPage() {
           <div></div>
         </div>
       ) : (
-        "No order Yet"
-      )} */}
-      <div>Accepted Orders</div>
+        ""
+      )}
+      <div>All Orders</div>
       <div className="all-order-sec">
         {allorders
           ? allorders.map((item, index) => (

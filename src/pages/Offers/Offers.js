@@ -30,6 +30,8 @@ function Offers() {
 },
   ];
   return <div className="offer">
+    <h3 style={{paddingLeft:'30px'}}>New Offers</h3>
+    <div className="cont-offers">
     {offer.map((item,index) =>
             item.img ? (
               <Card item={item} key={index} index={index} />
@@ -37,6 +39,7 @@ function Offers() {
               ""
             )
           )}
+    </div>
   </div>;
 }
 

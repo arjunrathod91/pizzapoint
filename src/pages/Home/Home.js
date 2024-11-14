@@ -53,7 +53,7 @@ function Home() {
     setTimeout(() => {
       setSliderImg(newImg);
       setStyle({ transform: 'translateX(0)', transition: 'none' }); // Reset position after changing image
-    }, 400);
+    }, 200);
   }
 
   useEffect(() => {

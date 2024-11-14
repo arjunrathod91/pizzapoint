@@ -71,8 +71,9 @@ function OrdersPage() {
     cancel();
   };
   const cancel = () => {
+    console.log(newOrders._id)
     axios
-      .delete("https://localhost:8000/newOrder", {
+      .delete("https://pizzapointserver-1.onrender.com/newOrder", {
         data: { id: newOrders._id }, // pass the order ID in the body
       })
       .then((response) => {

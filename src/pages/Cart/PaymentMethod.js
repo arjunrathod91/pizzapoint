@@ -7,7 +7,7 @@ import axios from "axios";
 function PaymentMethod() {
   const [paymentType, setPaymentType] = useState("");
   const billObj = JSON.parse(localStorage.getItem("newOrder")) || [];
-  const { cart, allorders } = useContext(Context);
+  const { cart,setCart, allorders } = useContext(Context);
   const navigate = useNavigate();
 
   const handlePayment = () => {
@@ -48,6 +48,7 @@ function PaymentMethod() {
     if (paymentType === "Online") {
       billObj["paymentType"] = paymentType;
       handlePayment();
+      setCart("");
     } else {
       navigate("/orderplaced");
     }
@@ -62,7 +63,7 @@ function PaymentMethod() {
         <div className="bill">
           Total Bill : ₹<span style={{ fontWeight: "500" }}>{billObj.total}</span>
         </div>
-        {allorders.map((item, index) => (
+        {cart.map((item, index) => (
           <div>
             <div className="item-box" index={index}>
               <div className="img-sec">

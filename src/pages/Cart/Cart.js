@@ -103,7 +103,6 @@ function Cart() {
             userUpdate
           );
           navigate("/paymentmethod");
-          setCart("");
           console.log("Order updated successfully:", response1.data);
         } catch (error) {
           console.log(error);

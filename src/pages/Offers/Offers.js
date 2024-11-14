@@ -6,8 +6,6 @@ function Offers() {
   const offer = [
     {
       name: 'Double Promo of 3 Regular Pizza For 200',
-      ingridient: 'Onion, tomato, chicken tikka and liquid cheese and mozzarella cheese.',
-      rating: 4.5,
       price: '119',
       img: 'https://www.everydayonsales.com/wp-content/uploads/sites/5/2020/09/9d165228-b4bc-4498-b74f-a995823982ee.jpg',
       category:'offer',
@@ -16,8 +14,6 @@ function Offers() {
   },
   {
     name: 'Double Promo of 3 Regular Pizza For 200',
-    ingridient: 'Onion, tomato, chicken tikka and liquid cheese and mozzarella cheese.',
-    rating: 4.5,
     price: '119',
     img: 'https://www.everydayonsales.com/wp-content/uploads/sites/5/2020/09/9d165228-b4bc-4498-b74f-a995823982ee.jpg',
     category:'offer',
@@ -26,8 +22,6 @@ function Offers() {
 },
 {
   name: 'Double Promo of 3 Regular Pizza For 200',
-  ingridient: 'Onion, tomato, chicken tikka and liquid cheese and mozzarella cheese.',
-  rating: 4.5,
   price: '119',
   img: 'https://www.everydayonsales.com/wp-content/uploads/sites/5/2020/09/9d165228-b4bc-4498-b74f-a995823982ee.jpg',
   category:'offer',

@@ -42,12 +42,12 @@ function Card({ item, index }) {
         <div className="d1">
           <h3>{item.name}</h3>
           <span className="rating">
-            {item.rating}
-            <StarHalfIcon sx={{ fontSize: 19 }} />
+            {item.rating ? item.rating : ''}
+            {item.rating ? <StarHalfIcon sx={{ fontSize: 19 }} /> : 'Bestseller'}
           </span>
         </div>
         <div className="d2">
-          <p>{item.ingridient.substring(0, 10)}</p>
+          <p>{item.ingridient ? item.ingridient.substring(0, 10) : ''}</p>
           <p className="price">₹{item.price}</p>
         </div>
         <button

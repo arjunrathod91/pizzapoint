@@ -49,9 +49,12 @@
     padding: 8px 10px;
     font-size: 15px;
     font-weight: 400;
-    background-color: orange;
+    background-color: rgb(255, 166, 0);
     border: none;
     color: white;
     border-radius: 5px;
     float: right;
+}
+.order:hover{
+    background-color: rgb(231, 143, 3);
 }

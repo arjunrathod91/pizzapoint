@@ -1,46 +1,49 @@
-import React from 'react'
+import React from "react";
+import "./Offers.css";
+import Card from "../../components/Card/Card";
 
 function Offers() {
-  return (
-    <div>
-        <div className="overflow">
-        <div className="slider">
-          <div className="s-left">
-            <img src={''} alt="" />
-          </div>
-          <div className="s-right">
-            <strong>Pizza Point</strong>
-            <p>Cheesy Fun Flavour</p>
-            <button>Order Now</button>
-          </div>
-        </div>
-      </div>
-      <div className="overflow">
-        <div className="slider">
-          <div className="s-left">
-            <img src={''} alt="" />
-          </div>
-          <div className="s-right">
-            <strong>Pizza Point</strong>
-            <p>Cheesy Fun Flavour</p>
-            <button>Order Now</button>
-          </div>
-        </div>
-      </div>
-      <div className="overflow">
-        <div className="slider">
-          <div className="s-left">
-            <img src={''} alt="" />
-          </div>
-          <div className="s-right">
-            <strong>Pizza Point</strong>
-            <p>Cheesy Fun Flavour</p>
-            <button>Order Now</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+  const offer = [
+    {
+      name: 'Double Promo of 3 Regular Pizza For 200',
+      ingridient: 'Onion, tomato, chicken tikka and liquid cheese and mozzarella cheese.',
+      rating: 4.5,
+      price: '119',
+      img: 'https://www.everydayonsales.com/wp-content/uploads/sites/5/2020/09/9d165228-b4bc-4498-b74f-a995823982ee.jpg',
+      category:'offer',
+      type:'non-veg',
+      tag:'chicken pizza'
+  },
+  {
+    name: 'Double Promo of 3 Regular Pizza For 200',
+    ingridient: 'Onion, tomato, chicken tikka and liquid cheese and mozzarella cheese.',
+    rating: 4.5,
+    price: '119',
+    img: 'https://www.everydayonsales.com/wp-content/uploads/sites/5/2020/09/9d165228-b4bc-4498-b74f-a995823982ee.jpg',
+    category:'offer',
+    type:'non-veg',
+    tag:'chicken pizza'
+},
+{
+  name: 'Double Promo of 3 Regular Pizza For 200',
+  ingridient: 'Onion, tomato, chicken tikka and liquid cheese and mozzarella cheese.',
+  rating: 4.5,
+  price: '119',
+  img: 'https://www.everydayonsales.com/wp-content/uploads/sites/5/2020/09/9d165228-b4bc-4498-b74f-a995823982ee.jpg',
+  category:'offer',
+  type:'non-veg',
+  tag:'chicken pizza'
+},
+  ];
+  return <div className="offer">
+    {offer.map((item,index) =>
+            item.img ? (
+              <Card item={item} key={index} index={index} />
+            ) : (
+              ""
+            )
+          )}
+  </div>;
 }
 
-export default Offers
+export default Offers;

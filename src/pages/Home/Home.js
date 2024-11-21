@@ -15,12 +15,20 @@ import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Context } from "../../context/Context";
 import Card from "../../components/Card/Card";
-import axios from 'axios';
+import axios from "axios";
 
 function Home() {
   const navigate = useNavigate();
-  const { sidebarOpen, setSidebarOpen, cart, setCart, total, setTotal,category,setCategory } =
-    useContext(Context);
+  const {
+    sidebarOpen,
+    setSidebarOpen,
+    cart,
+    setCart,
+    total,
+    setTotal,
+    category,
+    setCategory,
+  } = useContext(Context);
 
   const cartObj = (item) => {
     setCart((prevCart) => {
@@ -31,20 +39,19 @@ function Home() {
   const imgSrc = [
     "https://static.vecteezy.com/system/resources/previews/023/961/870/original/pizza-banner-or-background-pizza-on-the-board-illustration-vector.jpg",
     "https://th.bing.com/th/id/OIP.FFmT5wGpju1U9siFEF8lmAHaJl?w=535&h=693&rs=1&pid=ImgDetMain",
-    "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/cheese-pizza-ads-design-template-2fa7920016ef784e5897f4d95e281386_screen.jpg?ts=1691136569"
-  ]
+    "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/cheese-pizza-ads-design-template-2fa7920016ef784e5897f4d95e281386_screen.jpg?ts=1691136569",
+  ];
 
-  const [sliderImg,setSliderImg] = useState(imgSrc[0]);
+  const [sliderImg, setSliderImg] = useState(imgSrc[0]);
   const [style, setStyle] = useState({});
-  const [activeIndex,setActiveIndex] = useState('0');
-  const [allItems,setAllItems] = useState([]);
-  const [loadMore,setLoadMore] = useState([10])
-  
+  const [activeIndex, setActiveIndex] = useState("0");
+  const [allItems, setAllItems] = useState([]);
+  const [loadMore, setLoadMore] = useState(10);
 
-  const transition=(newImg)=>{
+  const transition = (newImg) => {
     setStyle({
-      transform: 'translateX(-100%)', // Add transform effect, for example, scaling the image
-      transition: 'transform 0.4s ease-in-out', // Apply smooth transition
+      transform: "translateX(-100%)", // Add transform effect, for example, scaling the image
+      transition: "transform 0.4s ease-in-out", // Apply smooth transition
     });
 
     // Reset the style after the transition is complete (optional)
@@ -53,34 +60,38 @@ function Home() {
     // }, 400);
     setTimeout(() => {
       setSliderImg(newImg);
-      setStyle({ transform: 'translateX(0)', transition: 'none' }); // Reset position after changing image
+      setStyle({ transform: "translateX(0)", transition: "none" }); // Reset position after changing image
     }, 200);
-  }
+  };
 
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await axios.get('https://pizzapointserver-1.onrender.com/allItems');
+        const response = await axios.get(
+          "https://pizzapointserver-1.onrender.com/allItems"
+        );
         setAllItems(response.data);
       } catch (err) {
-        console.error('Error fetching menu data:', err);
-        console.log(err)
+        console.error("Error fetching menu data:", err);
+        console.log(err);
       }
     };
 
-    fetchMenu(); 
+    fetchMenu();
   }, []);
 
-  const categoryClick=(item)=>{
+  const categoryClick = (item) => {
     // setTimeout(()=>{
     //   localStorage.setItem("category",category)
     // },3000)
-    localStorage.setItem("category",item);
-  }
+    localStorage.setItem("category", item);
+  };
 
   const isValidImage = (url) => {
     // Check for a valid URL structure
-    return typeof url === "string" && url.startsWith("http") && url.trim() !== "";
+    return (
+      typeof url === "string" && url.startsWith("http") && url.trim() !== ""
+    );
   };
   return (
     <div className="home">
@@ -94,9 +105,27 @@ function Home() {
         <div className="slider">
           <img src={sliderImg} style={style} />
           <div className="controls">
-            <div className={`ball ${activeIndex === '0' ? 'active' : ''}`} onClick={()=>{transition(imgSrc[0]);setActiveIndex('0')}}></div>
-            <div className={`ball ${activeIndex === '1' ? 'active' : ''}`} onClick={()=>{transition(imgSrc[1]);setActiveIndex('1')}}></div>
-            <div className={`ball ${activeIndex === '2' ? 'active' : ''}`} onClick={()=>{transition(imgSrc[2]);setActiveIndex('2')}}></div>
+            <div
+              className={`ball ${activeIndex === "0" ? "active" : ""}`}
+              onClick={() => {
+                transition(imgSrc[0]);
+                setActiveIndex("0");
+              }}
+            ></div>
+            <div
+              className={`ball ${activeIndex === "1" ? "active" : ""}`}
+              onClick={() => {
+                transition(imgSrc[1]);
+                setActiveIndex("1");
+              }}
+            ></div>
+            <div
+              className={`ball ${activeIndex === "2" ? "active" : ""}`}
+              onClick={() => {
+                transition(imgSrc[2]);
+                setActiveIndex("2");
+              }}
+            ></div>
           </div>
           {/* <div className="s-left">
             <img src={''} alt="" />
@@ -113,23 +142,66 @@ function Home() {
           <h2>Dishes</h2>
         </div>
         <div className="s1-down">
-          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('pizza');navigate('/menu');categoryClick("pizza")}}>
-            <img src="https://static.vecteezy.com/system/resources/previews/021/311/747/non_2x/pizza-transparent-background-png.png" alt="" />
+          <div
+            className="box"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setCategory("pizza");
+              navigate("/menu");
+              categoryClick("pizza");
+            }}
+          >
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/021/311/747/non_2x/pizza-transparent-background-png.png"
+              alt=""
+            />
             <p>Pizza</p>
           </div>
-          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('burger');navigate('/menu');categoryClick("burger")}}>
+          <div
+            className="box"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setCategory("burger");
+              navigate("/menu");
+              categoryClick("burger");
+            }}
+          >
             <img src={burger} alt="" />
             <p>Burger</p>
           </div>
-          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('fries');navigate('/menu');categoryClick("fries")}}>
+          <div
+            className="box"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setCategory("fries");
+              navigate("/menu");
+              categoryClick("fries");
+            }}
+          >
             <img src={fries} alt="" />
             <p>Fries</p>
           </div>
-          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('momos');navigate('/menu');categoryClick("momos")}}>
+          <div
+            className="box"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setCategory("momos");
+              navigate("/menu");
+              categoryClick("momos");
+            }}
+          >
             <img src={momos} alt="" />
             <p>Momos</p>
           </div>
-          <div className="box" style={{cursor:'pointer'}} onClick={()=>{setCategory('sandwich');navigate('/menu');categoryClick("sandwitch")}}>
+          <div
+            className="box"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setCategory("sandwich");
+              navigate("/menu");
+              categoryClick("sandwitch");
+            }}
+          >
             <img src={sandwitch} alt="" />
             <p>Sandwitch</p>
           </div>
@@ -138,22 +210,29 @@ function Home() {
       <section className="section2">
         <h2>{allItems.length > 0 ? "Bestseller" : ""}</h2>
         <div className="s2-down">
-          {allItems.length > 0 ? allItems.slice(0, loadMore).map((item,index) =>
-            item?.img && isValidImage(item.img) ? 
-            // (
-              <Card item={item} key={index} index={index} />
-            // )
-             : (
-              ""
+          {allItems.length > 0 ? (
+            allItems.slice(0, loadMore).map((item, index) =>
+              item?.img && isValidImage(item.img) ? (
+                // (
+                <Card item={item} key={index} index={index} />
+              ) : (
+                // )
+                ""
+              )
             )
-          ):
-          <div className="loading">
-            <img src="https://icon-library.com/images/burger-icon-png/burger-icon-png-1.jpg" />
-            <div style={{marginLeft:'5px'}}>Loading ...</div>
-          </div>
-          }
+          ) : (
+            <div className="loading">
+              <img src="https://icon-library.com/images/burger-icon-png/burger-icon-png-1.jpg" />
+              <div style={{ marginLeft: "5px" }}>Loading ...</div>
+            </div>
+          )}
         </div>
-        <div onClick={()=>setLoadMore(loadMore+10)} style={{display:'flex',float:"right"}}>See More</div>
+        <div
+          onClick={() => setLoadMore((prev) => prev + 10)}
+          style={{ display: "flex", float: "right" }}
+        >
+          See More
+        </div>
       </section>
       {/* {allItems.length > 0 ? console.log(true) : console.log(false)} */}
       {/* <section className="section2">
@@ -211,7 +290,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

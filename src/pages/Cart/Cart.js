@@ -96,6 +96,7 @@ function Cart() {
           contact: user[0].contact,
           address: user[0].address,
           order: cart,
+          total:total
         };
         try {
           const response1 = await axios.put(
@@ -169,42 +170,6 @@ function Cart() {
     }
   });
   return (
-    // <div className="add-card">
-    //   <input placeholder="Title of item" />
-    //   <input placeholder="Ingredient" />
-    //   <input placeholder="url" />
-    //   <input placeholder="Price" />
-    //   <label>Type</label>
-    //   <div className="option">
-    //     <div className="veg">
-    //       <input type="radio" className="non-veg-in" />
-    //       Veg
-    //     </div>
-    //     <div className="non-veg">
-    //       <input type="radio" className="non-veg-in" />
-    //       <span>Non-Veg</span>
-    //     </div>
-    //   </div>
-    //   <input placeholder="Category" />
-    //   <input placeholder="Tag" />
-    //   <button className="add-btn">Add Item</button>
-    // </div>
-
-    // name: "Healthy Tandoori Chicken Sandwich",
-    // ingridient:
-    //   "Marinated with tandoori chicken and mix veggies to give delicious taste.",
-    // rating: 4.4,
-    // price: "149",
-    // img: "",
-    // category: "sandwich",
-    // type: "chicken",
-    // tag: "chicken sandwich",
-
-    //info to the owner
-    //name
-    //contact no
-    //email
-    //his order list
     <div className="cart">
       {cart.length == 0 ? (
         <div

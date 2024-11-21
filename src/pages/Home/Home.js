@@ -38,6 +38,7 @@ function Home() {
   const [style, setStyle] = useState({});
   const [activeIndex,setActiveIndex] = useState('0');
   const [allItems,setAllItems] = useState([]);
+  const [loadMore,setLoadMore] = useState([10])
   
 
   const transition=(newImg)=>{
@@ -76,6 +77,11 @@ function Home() {
     // },3000)
     localStorage.setItem("category",item);
   }
+
+  const isValidImage = (url) => {
+    // Check for a valid URL structure
+    return typeof url === "string" && url.startsWith("http") && url.trim() !== "";
+  };
   return (
     <div className="home">
       <div
@@ -130,17 +136,26 @@ function Home() {
         </div>
       </section>
       <section className="section2">
-        <h2>BestSeller</h2>
+        <h2>{allItems.length > 0 ? "Bestseller" : ""}</h2>
         <div className="s2-down">
-          {allItems.map((item,index) =>
-            item.img ? (
+          {allItems.length > 0 ? allItems.slice(0, loadMore).map((item,index) =>
+            item?.img && isValidImage(item.img) ? 
+            // (
               <Card item={item} key={index} index={index} />
-            ) : (
+            // )
+             : (
               ""
             )
-          )}
+          ):
+          <div className="loading">
+            <img src="https://icon-library.com/images/burger-icon-png/burger-icon-png-1.jpg" />
+            <div style={{marginLeft:'5px'}}>Loading ...</div>
+          </div>
+          }
         </div>
+        <div onClick={()=>setLoadMore(loadMore+10)} style={{display:'flex',float:"right"}}>See More</div>
       </section>
+      {/* {allItems.length > 0 ? console.log(true) : console.log(false)} */}
       {/* <section className="section2">
         <h2>Top Dishes</h2>
         <div className="s2-down">
@@ -196,6 +211,7 @@ function Home() {
           </div>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }

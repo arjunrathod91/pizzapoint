@@ -36,8 +36,7 @@
     flex: 4;
     width: 70%;
     height: 100%;
-    padding-left:20px ;
-    background-color: rgb(233, 233, 233);
+    padding:20px ;
 }
 .add-column{
     display: flex;
@@ -133,3 +132,11 @@
     border: 1px solid gray;
     padding: 5px;
 }
+
+
+/*Menu*/
+/* .menu{
+    height: 100%;
+    width: 100%;
+    background-color: gold;
+} */

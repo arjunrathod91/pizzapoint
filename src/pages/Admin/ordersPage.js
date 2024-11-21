@@ -112,7 +112,8 @@ function OrdersPage() {
           <h1>Orders</h1>
           <div className="details-sec">
             <div style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}>
-              Orderd by {newOrders.username}
+              Orderd by {newOrders.
+total}
             </div>
             <div className="user-order">
               {newOrders.order.map((item, index) => (
@@ -153,7 +154,7 @@ function OrdersPage() {
                 <div>
                   Total Bill <span style={{ color: "red" }}>Paid</span>
                 </div>
-                <div>200</div>
+                <div>{newOrders.total}</div>
               </div>
               <div className="btn-sec">
                 <button className="accept" onClick={accept}>
@@ -179,7 +180,7 @@ function OrdersPage() {
                 <div
                   style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}
                 >
-                  Orderd by {allorders.username}
+                  Orderd by {item.username}
                 </div>
                 <div className="user-order">
                   {allorders
@@ -222,7 +223,7 @@ function OrdersPage() {
                     <div>
                       Total Bill <span style={{ color: "red" }}>Paid</span>
                     </div>
-                    <div>200</div>
+                    <div>{item.total}</div>
                   </div>
                 </div>
               </div>

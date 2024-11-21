@@ -102,7 +102,7 @@ function Admin() {
     //   </div>
     //   {/* {cart && <Cart/>} */}
     // </div>
-    <div className="profile">
+    <div className="admin">
       <div
         className="left"
         style={{

@@ -4,6 +4,7 @@
     border: 1px;
     border-radius: 10px;
     padding: 20px;
+    /* background-color: green; */
     box-shadow: 0.2px 0.9px 4px rgb(190, 190, 190);
 }
 .dishes img{
@@ -57,4 +58,48 @@
 }
 .order:hover{
     background-color: rgb(231, 143, 3);
+}
+
+@media only screen and (max-width:300px){
+    /* .s-left img{
+        height: 200px;
+        width: 150px;
+
+    }
+    .s2-down{
+        justify-content: center;
+        align-items: center;
+    } */
+    .dishes{
+        width: 500px;
+        background-color: green;
+    }
+    .dishes img{
+
+    }
+    .dishes .content{
+
+    }
+    .content div{
+        margin-bottom: 2px;
+
+    }
+
+    .content h3{
+        font-size: 13px;
+    }
+    .content .rating{
+        font-size: 12px;
+    }
+    .content div p{
+        font-size: 10px;
+    }
+    .content .price{
+        font-size: 15px;
+    }
+    .order{
+        padding: 5px;
+        font-size: 10px;
+    }
+
 }

@@ -227,12 +227,14 @@ function Home() {
             </div>
           )}
         </div>
-        <div
+        {allItems.length > loadMore && (
+          <div
           onClick={() => setLoadMore((prev) => prev + 10)}
-          style={{ display: "flex", float: "right" }}
+          style={{ display: "flex",justifyContent:"center",alignContent:'center',color:'blue',cursor:'pointer' }}
         >
           See More
         </div>
+        )}
       </section>
       {/* {allItems.length > 0 ? console.log(true) : console.log(false)} */}
       {/* <section className="section2">

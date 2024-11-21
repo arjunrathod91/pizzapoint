@@ -151,6 +151,31 @@ label{
     border-radius: 10px;
 }
 
+/* Order placed */
+.order-placed{
+    background-color: rgb(255, 187, 187);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+.mid-page{
+    height: 100%;
+    width: 800px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    /* padding:10px 10px 0 10px; */
+    padding:0 10px;
+}
+.mid-page img{
+    height: 100px;
+    width: 100px;
+}
+
 
 @media only screen and (max-width:634px) {
     .cart{

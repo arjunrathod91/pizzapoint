@@ -35,8 +35,8 @@
     width: 95%;
     height: 80%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: start;
 }
 .footer-tag{
     width: 100%;
@@ -74,4 +74,12 @@
 .links a:hover{
     color:rgb(81, 81, 81);
     cursor: pointer;
+}
+
+@media only screen and (max-width:530px){
+    .main-logo{
+        justify-content: center;
+        align-items: center;
+    }
+
 }

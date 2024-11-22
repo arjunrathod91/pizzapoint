@@ -96,7 +96,7 @@ function Cart() {
           contact: user[0].contact,
           address: user[0].address,
           order: cart,
-          total:total
+          total: total,
         };
         try {
           const response1 = await axios.put(
@@ -255,10 +255,48 @@ function Cart() {
               </div>
             </div>
           ))}
-          {/* <div>Add Ons</div>
-          <div>Pepsi</div> total + pepsi and obj + pepsi
-          <div>Cola</div>
-          <div>Cola</div> */}
+          <div className="add-on">
+            <h4>Add Ons</h4>
+            {/* <div>Pepsi</div> total + pepsi and obj + pepsi
+            <div>Cola</div>
+            <div>Cola</div> */}
+            <div className="add-on-box">
+              <div className="add-on-content">
+                <img className="add-on-img" src="https://cocacolaunited-old.s3.amazonaws.com/wp-content/uploads/2018/03/Sprite-20oz.png"/>
+                <div className="add-on-detail">
+                  <label>Sprite</label>
+                  <label>Rs.20</label>
+                </div>
+              </div>
+              <div className="add-on-more">
+                - 0 +
+              </div>
+            </div>
+            <div className="add-on-box">
+              <div className="add-on-content">
+                <img className="add-on-img" src="https://png.pngtree.com/png-clipart/20231116/original/pngtree-coca-cola-bottled-drink-isolated-photo-png-image_13575918.png"/>
+                <div className="add-on-detail">
+                  <label>Coka Cola</label>
+                  <label>Rs.20</label>
+                </div>
+              </div>
+              <div className="add-on-more">
+                - 0 +
+              </div>
+            </div>
+            <div className="add-on-box">
+              <div className="add-on-content">
+                <img className="add-on-img" src="https://www.borenos.com/wp-content/uploads/2018/11/50c-cheese-dip.png"/>
+                <div className="add-on-detail">
+                  <label>Extra Cheese</label>
+                  <label>Rs.20</label>
+                </div>
+              </div>
+              <div className="add-on-more">
+                - 0 +
+              </div>
+            </div>
+          </div>
           <button className="order-btn" onClick={orderNowBtn}>
             Order Now {cart.length == 0 ? 0 : total}
           </button>

@@ -176,6 +176,30 @@ label{
     width: 100px;
 }
 
+/*Add Ons*/
+.add-on{
+    width: 100%;
+}
+.add-on-box{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.add-on-content{
+    display: flex;
+    gap: 20px;
+}
+.add-on-img{
+    height: 60px;
+    width: 60px;
+}
+.add-on-detail{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: start;
+}
 
 @media only screen and (max-width:634px) {
     .cart{

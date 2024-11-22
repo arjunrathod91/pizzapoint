@@ -12,7 +12,8 @@ function Info() {
 
   return (
     <div className="info">
-      {isMobile ? (<div onClick={()=>setRIghtSec(false)}><ArrowBackIcon/></div>):""}
+      <div>User Details</div>
+      {/* {isMobile ? (<div onClick={()=>setRIghtSec(false)}><ArrowBackIcon/></div>):""}
       <div style={{padding:'20px'}}>
       <div>User Details</div>
         <div className="item-sec">
@@ -35,7 +36,7 @@ function Info() {
           <label className="label">Email Id</label>
           <div className="item">{user[0].email}</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

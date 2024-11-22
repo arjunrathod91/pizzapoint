@@ -33,6 +33,7 @@ function App() {
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/paymentmethod' element={<PaymentMethod/>}/>
         <Route path='/orderplaced' element={<OrderPlaced/>}/>
+        {/* <Route path='/product' element={<OrderPlaced/>}/> */}
       </Routes>
       </BrowserRouter>
       </MyContextProvider>

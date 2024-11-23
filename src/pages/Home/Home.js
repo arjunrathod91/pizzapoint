@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Context } from "../../context/Context";
 import Card from "../../components/Card/Card";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import axios from "axios";
 
 function Home() {
@@ -230,9 +231,9 @@ function Home() {
         {allItems.length > loadMore && (
           <div
           onClick={() => setLoadMore((prev) => prev + 10)}
-          style={{ display: "flex",justifyContent:"center",alignContent:'center',color:'blue',cursor:'pointer' }}
+          style={{ display: "flex",justifyContent:"center",alignContent:'center',color:'red',cursor:'pointer',marginBottom:'10px' }}
         >
-          See More
+          <label>See More</label><KeyboardArrowDownIcon sx={{fontSize:'30px'}}/>
         </div>
         )}
       </section>

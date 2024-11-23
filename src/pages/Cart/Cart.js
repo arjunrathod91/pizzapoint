@@ -26,6 +26,8 @@ function Cart() {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
+  const checkLoggedIn = JSON.parse(localStorage.getItem("loggedIn"));
+
   const navigate = useNavigate();
 
   const deleteItem = (item) => {
@@ -45,6 +47,18 @@ function Cart() {
     setTotal((prevTotal) => prevTotal + Number(item.price));
   };
 
+  const increasingAddOn = (item) => {
+    setCart((prev)=>[...prev,{ ...item, quantity: 1 }])
+    setTotal((prevTotal) => prevTotal + Number(item.price));
+  };
+
+  // const decreasingAddOn = (item) => {
+  //   if (item.quantity >= 1) {
+  //     item.quantity--;
+  //     console.log(item.name,":",item.quantity);
+  //   }
+  // };
+
   const decreasingOrder = (item) => {
     if (item.quantity > 1) {
       setCart((prevCart) =>
@@ -59,65 +73,69 @@ function Cart() {
   };
 
   const orderNowBtn = async () => {
-    if (loggedIn) {
+    console.log(checkLoggedIn)
+    if (checkLoggedIn == true) {
       if (total > 0) {
-        const currentDate = new Date().toLocaleString("en-IN", {
-          timeZone: "Asia/Kolkata",
-        });
-        const cartWithDate = cart.map((item) => ({
-          ...item,
-          date: currentDate,
-        }));
-        setAllOrders((prevOrders) => [...prevOrders, ...cartWithDate]);
+        navigate("/paymentmethod");
+        // const currentDate = new Date().toLocaleString("en-IN", {
+        //   timeZone: "Asia/Kolkata",
+        // });
+        // const cartWithDate = cart.map((item) => ({
+        //   ...item,
+        //   date: currentDate,
+        // }));
+        // setAllOrders((prevOrders) => [...prevOrders, ...cartWithDate]);
 
-        const latestOrder = profileDetails;
-        latestOrder["latestOrder"] = cartWithDate;
-        latestOrder["total"] = total;
-        localStorage.setItem("newOrder", JSON.stringify(latestOrder));
-        const prevOrders = JSON.parse(localStorage.getItem("adminOrder")) || [];
-        localStorage.setItem(
-          "adminOrder",
-          JSON.stringify([...prevOrders, latestOrder])
-        );
+        // const latestOrder = profileDetails;
+        // latestOrder["latestOrder"] = cartWithDate;
+        // latestOrder["total"] = total;
+        // localStorage.setItem("newOrder", JSON.stringify(latestOrder));
+        // const prevOrders = JSON.parse(localStorage.getItem("adminOrder")) || [];
+        // localStorage.setItem(
+        //   "adminOrder",
+        //   JSON.stringify([...prevOrders, latestOrder])
+        // );
 
-        const userUpdate = {
-          username: user[0].username,
-          email: user[0].email,
-          password: user[0].password,
-          contact: user[0].contact,
-          address: user[0].address,
-          cart: cart,
-          order: cart,
-        };
-        const userOrder = {
-          username: user[0].username,
-          email: user[0].email,
-          password: user[0].password,
-          contact: user[0].contact,
-          address: user[0].address,
-          order: cart,
-          total: total,
-        };
-        try {
-          const response1 = await axios.put(
-            "https://pizzapointserver-1.onrender.com/userDetail",
-            userUpdate
-          );
-          navigate("/paymentmethod");
-          console.log("Order updated successfully:", response1.data);
-        } catch (error) {
-          console.log(error);
-        }
+        // const userUpdate = {
+        //   username: user.username,
+        //   email: user.email,
+        //   password: user.password,
+        //   contact: user.contact,
+        //   address: user.address,
+        //   cart: cart,
+        //   order: cart,
+        // };
+        // const userOrder = {
+        //   username: user.username,
+        //   email: user.email,
+        //   password: user.password,
+        //   contact: user.contact,
+        //   address: user.address,
+        //   order: cart,
+        //   date:currentDate,
+        //   total: total,
+        // };
+        // localStorage.setItem("newOrder", JSON.stringify(userOrder));
+        // try {
+        //   const response1 = await axios.put(
+        //     "https://pizzapointserver-1.onrender.com/userDetail",
+        //     userUpdate
+        //   );
+        //   navigate("/paymentmethod");
+        //   console.log("User updated successfully:", response1.data);
+        // } catch (error) {
+        //   console.log(error);
+        // }
 
-        try {
-          const response = await axios.post(
-            "https://pizzapointserver-1.onrender.com/newOrder",
-            userOrder
-          );
-          console.log("the data of user sent successfully:", response.data);
-        } catch (error) {
-          console.log(error);
-        }
+        // try {
+        //   const response = await axios.post(
+        //     "https://pizzapointserver-1.onrender.com/newOrder",
+        //     userOrder
+        //   );
+        //   console.log("the data of user sent successfully:", response.data);
+        // } catch (error) {
+        //   console.log(error);
+        // }
 
         // setNewOrder(latestOrder)
         // setAdminOrders((prevOrders) => [...prevOrders, newOrder])
@@ -133,6 +151,17 @@ function Cart() {
       navigate("/profile");
     }
   };
+
+  // const increaseQuantity=(item)=>{
+  //   setCart((prevCart) =>
+  //     prevCart.map((cartItem) =>
+  //       cartItem.name === item.name
+  //         ? { ...cartItem, quantity: cartItem.quantity + 1 }
+  //         : cartItem
+  //     )
+  //   );
+  //   setTotal((prevTotal) => prevTotal + Number(item.price));
+  // }
 
   const handlePayment = () => {
     const options = {
@@ -169,6 +198,25 @@ function Cart() {
       setTotal(0);
     }
   });
+
+  const addOns = [
+    {
+      name: "Sprite",
+      price: 20,
+      img: "https://cocacolaunited-old.s3.amazonaws.com/wp-content/uploads/2018/03/Sprite-20oz.png",
+
+    },
+    {
+      name: "Coka Cola",
+      price: 20,
+      img: "https://png.pngtree.com/png-clipart/20231116/original/pngtree-coca-cola-bottled-drink-isolated-photo-png-image_13575918.png",
+    },
+    {
+      name: "Extra Cheese",
+      price: 20,
+      img: "https://www.borenos.com/wp-content/uploads/2018/11/50c-cheese-dip.png",
+    },
+  ];
   return (
     <div className="cart">
       {cart.length == 0 ? (
@@ -260,42 +308,22 @@ function Cart() {
             {/* <div>Pepsi</div> total + pepsi and obj + pepsi
             <div>Cola</div>
             <div>Cola</div> */}
-            <div className="add-on-box">
-              <div className="add-on-content">
-                <img className="add-on-img" src="https://cocacolaunited-old.s3.amazonaws.com/wp-content/uploads/2018/03/Sprite-20oz.png"/>
-                <div className="add-on-detail">
-                  <label>Sprite</label>
-                  <label>Rs.20</label>
+            {addOns.map((item, index) => (
+              <div className="add-on-box" item={item} key={index}>
+                <div className="add-on-content">
+                  <img className="add-on-img" src={item.img} />
+                  <div className="add-on-detail">
+                    <label>{item.name}</label>
+                    <label>Rs.{item.price}</label>
+                  </div>
+                </div>
+                <div className="add-on-more">
+                  <button onClick={() => increasingAddOn(item)}>Add</button>
+                  {/* {item.quantity}
+                  <button onClick={() => increasingAddOn(item)}>+</button> */}
                 </div>
               </div>
-              <div className="add-on-more">
-                - 0 +
-              </div>
-            </div>
-            <div className="add-on-box">
-              <div className="add-on-content">
-                <img className="add-on-img" src="https://png.pngtree.com/png-clipart/20231116/original/pngtree-coca-cola-bottled-drink-isolated-photo-png-image_13575918.png"/>
-                <div className="add-on-detail">
-                  <label>Coka Cola</label>
-                  <label>Rs.20</label>
-                </div>
-              </div>
-              <div className="add-on-more">
-                - 0 +
-              </div>
-            </div>
-            <div className="add-on-box">
-              <div className="add-on-content">
-                <img className="add-on-img" src="https://www.borenos.com/wp-content/uploads/2018/11/50c-cheese-dip.png"/>
-                <div className="add-on-detail">
-                  <label>Extra Cheese</label>
-                  <label>Rs.20</label>
-                </div>
-              </div>
-              <div className="add-on-more">
-                - 0 +
-              </div>
-            </div>
+            ))}
           </div>
           <button className="order-btn" onClick={orderNowBtn}>
             Order Now {cart.length == 0 ? 0 : total}

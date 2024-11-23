@@ -68,7 +68,17 @@ function OrdersPage() {
           console.error("Error setting up the request:", error.message);
         }
       });
-    cancel();
+
+      axios
+      .delete("https://pizzapointserver-1.onrender.com/newOrder", {
+        data: { id: newOrders._id }, // pass the order ID in the body
+      })
+      .then((response) => {
+        console.log("Order deleted:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error deleting order:", error);
+      });
   };
   const cancel = () => {
     console.log(newOrders._id)
@@ -152,7 +162,7 @@ total}
               ></div>
               <div className="order-item">
                 <div>
-                  Total Bill <span style={{ color: "red" }}>Paid</span>
+                  Total Bill {newOrders.paymentType == "COD" ? (<span style={{color:'red'}}>Unpaid</span>) :(<span style={{color:'green'}}>Paid</span>) }
                 </div>
                 <div>{newOrders.total}</div>
               </div>
@@ -221,7 +231,7 @@ total}
                   ></div>
                   <div className="order-item">
                     <div>
-                      Total Bill <span style={{ color: "red" }}>Paid</span>
+                      Total Bill <span style={{ color: "red" }}>{item.paymentType}</span>
                     </div>
                     <div>{item.total}</div>
                   </div>

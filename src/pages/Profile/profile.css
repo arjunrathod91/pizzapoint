@@ -134,6 +134,17 @@
     justify-content: start;
     align-items: start;
 }
+.logoutbtn{
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: gray;
+    font-family: sans-serif;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    font-size: 18px;
+    color: white;
+}
 
 @media only screen and (max-width:600px) {
     .profile .left{

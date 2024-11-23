@@ -7,8 +7,9 @@ import axios from "axios";
 function PaymentMethod() {
   const [paymentType, setPaymentType] = useState("");
   const billObj = JSON.parse(localStorage.getItem("newOrder")) || [];
-  const { cart,setCart, allorders } = useContext(Context);
+  const { cart,setCart, allorders,total } = useContext(Context);
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handlePayment = () => {
     const options = {
@@ -44,13 +45,55 @@ function PaymentMethod() {
 
   }
 
-  const payBill = () => {
+  const payBill = async () => {
+    const currentDate = new Date().toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+    });
+    const userUpdate = {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      contact: user.contact,
+      address: user.address,
+      cart: cart,
+      order: cart,
+    };
+    const userOrder = {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      contact: user.contact,
+      address: user.address,
+      order: cart,
+      date:currentDate,
+      paymentType:paymentType,
+      total: total,
+    };
+    console.log(userOrder);
     if (paymentType === "Online") {
-      billObj["paymentType"] = paymentType;
       handlePayment();
       setCart("");
     } else {
       navigate("/orderplaced");
+      setCart("");
+    }
+    try {
+      const response1 = await axios.put(
+        "https://pizzapointserver-1.onrender.com/userDetail",
+        userUpdate
+      );
+      // console.log("User updated successfully:", response1.data);
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      const response = await axios.post(
+        "https://pizzapointserver-1.onrender.com/newOrder",
+        userOrder
+      );
+      console.log("the data of user sent successfully:", response.data);
+    } catch (error) {
+      console.log(error);
     }
   };
 

@@ -1,29 +1,33 @@
 import React from "react";
 import "./Offers.css";
 import Card from "../../components/Card/Card";
+import img1 from '../../Images/im 1.jpeg'
+import img2 from '../../Images/im 2.jpeg'
+import img3 from '../../Images/im 3.jpeg'
+
 
 function Offers() {
   const offer = [
     {
-      name: 'Double Promo of 3 Regular Pizza For 200',
-      price: '119',
-      img: 'https://www.everydayonsales.com/wp-content/uploads/sites/5/2020/09/9d165228-b4bc-4498-b74f-a995823982ee.jpg',
+      name: 'Veggie supreme Pizza+cheese garlic bread+cold drink [250ml]',
+      price: '159',
+      img: img1,
       category:'offer',
       type:'non-veg',
       tag:'chicken pizza'
   },
   {
-    name: 'Double Promo of 3 Regular Pizza For 200',
-    price: '119',
-    img: 'https://www.everydayonsales.com/wp-content/uploads/sites/5/2020/09/9d165228-b4bc-4498-b74f-a995823982ee.jpg',
+    name: 'Veg tandoori burger+peri peri fries + 1 cold drinks0',
+    price: '109',
+    img: img2,
     category:'offer',
     type:'non-veg',
     tag:'chicken pizza'
 },
 {
-  name: 'Double Promo of 3 Regular Pizza For 200',
-  price: '119',
-  img: 'https://www.everydayonsales.com/wp-content/uploads/sites/5/2020/09/9d165228-b4bc-4498-b74f-a995823982ee.jpg',
+  name: 'Meal for 1 [1 supreme pizza+peri peri fries+1cold drinks]',
+  price: '159',
+  img: img3,
   category:'offer',
   type:'non-veg',
   tag:'chicken pizza'

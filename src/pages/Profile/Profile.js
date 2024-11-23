@@ -36,9 +36,17 @@ function Profile() {
     }
   };
   useEffect(() => {
-    if (!loggedIn) {
-      navigate("/login");
+    const user = JSON.parse(localStorage.getItem("loggedIn"));
+    // console.log(user)
+    if (user == "true") {
+      navigate("/profile");
     }
+    // else{
+    //   navigate('/login');
+    // }
+    // else{
+    //   navigate("/profile");
+    // }
   });
   return (
     <div className="profile">
@@ -76,6 +84,20 @@ function Profile() {
         >
           <LocalShipping />
           <span>Orders</span>
+        </div>
+        {/* <div
+          className="pro-sec"
+          onClick={() => {
+            setSection("Orders");
+            responsiveCtr();
+            setRIghtSec(true);
+          }}
+        >
+          <LocalShipping />
+          <span>Logout</span>
+        </div> */}
+        <div className="pro-sec">
+          <button className="logoutbtn" onClick={()=>setLoggedIn(false)}>Logout</button>
         </div>
       </div>
       <div

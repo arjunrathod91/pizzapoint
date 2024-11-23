@@ -16,11 +16,11 @@ function Card({ item, index }) {
     });
 
     const userUpdate = {
-      username: user[0].username,
-      email: user[0].email,
-      password: user[0].password,
-      contact: user[0].contact,
-      address: user[0].address,
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      contact: user.contact,
+      address: user.address,
       cart: [...cart, { ...item, quantity: 1 }], // Include the new item in the cart
     };
     console.log(userUpdate);

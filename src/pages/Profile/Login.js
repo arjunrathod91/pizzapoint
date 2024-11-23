@@ -21,8 +21,9 @@ function Login({}) {
           password: inputPassword
         });
     
-        if (response.data.success) {
+        if (response.data) {
           navigate('/profile');
+          localStorage.setItem("user", JSON.stringify(response.data));
         } else {
           alert('Invalid email or password');
         }

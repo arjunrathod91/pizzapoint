@@ -25,7 +25,7 @@ function Cart() {
   } = useContext(Context);
 
   const user = JSON.parse(localStorage.getItem("user"));
-
+  const [addons,setAddOns] = useState([]);
   const checkLoggedIn = JSON.parse(localStorage.getItem("loggedIn"));
 
   const navigate = useNavigate();
@@ -217,6 +217,23 @@ function Cart() {
       img: "https://www.borenos.com/wp-content/uploads/2018/11/50c-cheese-dip.png",
     },
   ];
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const response = await axios.get(
+          "https://pizzapointserver-1.onrender.com/allItems"
+        );
+        setAddOns(response.data.filter((item) => item.category === "add ons"));
+      } catch (err) {
+        console.error("Error fetching menu data:", err);
+        console.log(err);
+      }
+    };
+
+    fetchMenu();
+  }, []);
+
   return (
     <div className="cart">
       {cart.length == 0 ? (
@@ -308,7 +325,7 @@ function Cart() {
             {/* <div>Pepsi</div> total + pepsi and obj + pepsi
             <div>Cola</div>
             <div>Cola</div> */}
-            {addOns.map((item, index) => (
+            {addons.map((item, index) => (
               <div className="add-on-box" item={item} key={index}>
                 <div className="add-on-content">
                   <img className="add-on-img" src={item.img} />

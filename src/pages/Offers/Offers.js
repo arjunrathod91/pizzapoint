@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Offers.css";
 import Card from "../../components/Card/Card";
 import img1 from '../../Images/im 1.jpeg'
 import img2 from '../../Images/im 2.jpeg'
 import img3 from '../../Images/im 3.jpeg'
 import img4 from '../../Images/newoffer.png'
+import axios from "axios";
 
 
 function Offers() {
+  const [offers,setOffers] = useState([])
   const offer = [
     {
       name: 'Veggie supreme Pizza+cheese garlic bread+cold drink [250ml]',
@@ -42,10 +44,26 @@ function Offers() {
   tag:'chicken pizza'
 },
   ];
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const response = await axios.get(
+          "https://pizzapointserver-1.onrender.com/allItems"
+        );
+        setOffers(response.data.filter((item) => item.category === "offers"));
+      } catch (err) {
+        console.error("Error fetching menu data:", err);
+        console.log(err);
+      }
+    };
+
+    fetchMenu();
+  }, []);
   return <div className="offer">
     <h3 style={{paddingLeft:'30px'}}>New Offers</h3>
     <div className="cont-offers">
-    {offer.map((item,index) =>
+    {offers.map((item,index) =>
             item.img ? (
               <Card item={item} key={index} index={index} />
             ) : (

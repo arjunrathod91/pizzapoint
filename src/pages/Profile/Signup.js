@@ -33,6 +33,8 @@ function Signup() {
         .post("https://pizzapointserver-1.onrender.com/userDetail", user)
         .then((response) => {
           console.log(response.data);
+          localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("loggedIn",JSON.stringify(true));
         })
         .catch((error) => {
           console.error("There was an error", error);

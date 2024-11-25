@@ -4,6 +4,7 @@ import Card from "../../components/Card/Card";
 import img1 from '../../Images/im 1.jpeg'
 import img2 from '../../Images/im 2.jpeg'
 import img3 from '../../Images/im 3.jpeg'
+import img4 from '../../Images/newoffer.png'
 
 
 function Offers() {
@@ -28,6 +29,14 @@ function Offers() {
   name: 'Meal for 1 [1 supreme pizza+peri peri fries+1cold drinks]',
   price: '159',
   img: img3,
+  category:'offer',
+  type:'non-veg',
+  tag:'chicken pizza'
+},
+{
+  name: 'Tandoori paneer pizza+veggie supreme pizza',
+  price: '159',
+  img: img4,
   category:'offer',
   type:'non-veg',
   tag:'chicken pizza'

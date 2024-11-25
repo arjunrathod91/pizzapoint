@@ -37,16 +37,9 @@ function Profile() {
   };
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("loggedIn"));
-    // console.log(user)
-    if (user == "true") {
-      navigate("/profile");
+    if(!user || user == "false"){
+      navigate('/login');
     }
-    // else{
-    //   navigate('/login');
-    // }
-    // else{
-    //   navigate("/profile");
-    // }
   });
   return (
     <div className="profile">
@@ -97,7 +90,7 @@ function Profile() {
           <span>Logout</span>
         </div> */}
         <div className="pro-sec">
-          <button className="logoutbtn" onClick={()=>setLoggedIn(false)}>Logout</button>
+          <button className="logoutbtn" onClick={()=>{localStorage.setItem('loggedIn',JSON.stringify(false));navigate('/login')}}>Logout</button>
         </div>
       </div>
       <div

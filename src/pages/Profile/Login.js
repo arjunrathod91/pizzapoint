@@ -22,15 +22,12 @@ function Login({}) {
         });
     
         if (response.data) {
-          navigate('/profile');
           localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("loggedIn",JSON.stringify(true));
         } else {
           alert('Invalid email or password');
         }
-        
-        const userData = response.data;
-        console.log(userData);
-    
+        navigate('/profile');
       } catch (err) {
         console.error('Error fetching menu data:', err);
       }

@@ -55,7 +55,7 @@ function Card({ item, index }) {
           style={{ cursor: "pointer" }}
           onClick={() => cartObj(item)}
         >
-          Order Now
+          Add to cart
         </button>
       </div>
     </div>

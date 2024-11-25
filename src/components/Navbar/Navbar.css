@@ -26,13 +26,32 @@
     color: #fff;
     font-weight: bold;
 }
+.hover-item{
+    padding: 5px;
+    border-radius: 5px;
+    /* background-color: red; */
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.hover-item:hover{
+    background-color: rgba(162, 162, 162, 0.274);
+}
 
-.right ul,li{
+.right .nav-links{
     display: flex;
     gap: 20px;
-    list-style: none;
-    font-weight: 400;
+    /* list-style: none; */
+    font-weight: 500;
     color: #fff;
+}
+.right .nav-link{
+    /* padding-bottom: 5px; */
+}
+.right .nav-link:hover{
+    /* border-bottom: 2px solid rgb(255, 255, 255);  */
+    padding-bottom: 5px;
+
 }
 ul li{
     cursor: pointer;

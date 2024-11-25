@@ -15,7 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Context } from "../../context/Context";
 import Card from "../../components/Card/Card";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import axios from "axios";
 
 function Home() {
@@ -64,6 +64,21 @@ function Home() {
       setStyle({ transform: "translateX(0)", transition: "none" }); // Reset position after changing image
     }, 200);
   };
+
+  const reviews = [
+    {
+      name:'Arjun Rathod',
+      message:'Taste is unique and better than any other brands'
+    },
+    {
+      name:'Karan Rathod',
+      message:'Taste is unique and better than any other brands'
+    },
+    {
+      name:'Karan Rathod',
+      message:'Taste is unique and better than any other brands'
+    }
+  ]
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -230,11 +245,13 @@ function Home() {
         </div>
         {allItems.length > loadMore && (
           <div
-          onClick={() => setLoadMore((prev) => prev + 10)}
-          style={{ display: "flex",justifyContent:"center",alignContent:'center',color:'red',cursor:'pointer',marginBottom:'10px' }}
-        >
-          <label>See More</label><KeyboardArrowDownIcon sx={{fontSize:'30px'}}/>
-        </div>
+            className="seemore"
+            onClick={() => setLoadMore((prev) => prev + 10)}
+            style={{}}
+          >
+            <label>See more</label>
+            <KeyboardArrowDownIcon sx={{ fontSize: "30px" }} />
+          </div>
         )}
       </section>
       {/* {allItems.length > 0 ? console.log(true) : console.log(false)} */}
@@ -247,6 +264,7 @@ function Home() {
         </div>
       </section> */}
       <section className="call-delivery">
+        <img src="https://www.dominos.co.in/theme2/front/assets/banner2.webp" />
         {/* <div><img src={telephone} alt="" />
         <p className="delivery-text">Call On Delivary</p>
         </div>
@@ -255,42 +273,52 @@ function Home() {
           <p className="order-no">+91 7350887544</p>
         </div> */}
       </section>
+      {/* <section className="contact-us">
+        <div className="heads">Contact Us</div>
+        <div className="cont-cont">
+          <div className="div1">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d571.8255378126707!2d73.83078471592587!3d18.464415178443392!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc295fb94e7d529%3A0xd5ad6243e01a0ecb!2sPizza%20Point!5e0!3m2!1sen!2sin!4v1732528906508!5m2!1sen!2sin"
+              // width="390"
+              // height="390"
+              className="map"
+              style={{border:'0',padding:'20px',borderRadius:'5px'}}
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <div className="div2">
+            <div className="cont-form-cont">
+              <div>
+                <label>Name</label>
+                <input placeholder="Enter Your Name"/>
+              </div>
+              <div>
+                <label>Email</label>
+                <input placeholder="Enter Your Email"/>
+              </div>
+              <div>
+                <label>Message</label>
+                <input className="inp" placeholder="Message"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
       <section className="reviews">
         <div className="heads"> Reviews</div>
         <div className="block">
-          <div className="review">
-            <img
-              src="https://th.bing.com/th/id/R.401e039791cb60a99db7574995b20ac5?rik=rp30JJuIzeQdWg&riu=http%3a%2f%2fwww.dailyexcelsior.com%2fwp-content%2fuploads%2f2018%2f12%2fShahrukh-Khan.jpg&ehk=6AraZHbQ%2fZ2Gti88ZqaMmCK05C74TjyOsO%2buVFCUT3I%3d&risl=&pid=ImgRaw&r=0"
-              alt=""
-            />
-            <div>Rating</div>
-            <p>
-              Pizza Point is very good in teast. Everyone should have to try it
-              once. It have potential to dominate Dominos
-            </p>
-          </div>
-          <div className="review">
-            <img
-              src="https://th.bing.com/th/id/R.401e039791cb60a99db7574995b20ac5?rik=rp30JJuIzeQdWg&riu=http%3a%2f%2fwww.dailyexcelsior.com%2fwp-content%2fuploads%2f2018%2f12%2fShahrukh-Khan.jpg&ehk=6AraZHbQ%2fZ2Gti88ZqaMmCK05C74TjyOsO%2buVFCUT3I%3d&risl=&pid=ImgRaw&r=0"
-              alt=""
-            />
-            <div>Rating</div>
-            <p>
-              Pizza Point is very good in teast. Everyone should have to try it
-              once. It have potential to dominate Dominos
-            </p>
-          </div>
-          <div className="review">
-            <img
-              src="https://th.bing.com/th/id/R.401e039791cb60a99db7574995b20ac5?rik=rp30JJuIzeQdWg&riu=http%3a%2f%2fwww.dailyexcelsior.com%2fwp-content%2fuploads%2f2018%2f12%2fShahrukh-Khan.jpg&ehk=6AraZHbQ%2fZ2Gti88ZqaMmCK05C74TjyOsO%2buVFCUT3I%3d&risl=&pid=ImgRaw&r=0"
-              alt=""
-            />
-            <div>Rating</div>
-            <p>
-              Pizza Point is very good in teast. Everyone should have to try it
-              once. It have potential to dominate Dominos
-            </p>
-          </div>
+            {reviews.map((item,index)=>(
+              <div className="review" key={index}>
+              <div>
+                <p>
+                  {item.message}
+                </p>
+              </div>
+              <div style={{display:'flex',width:'100%',justifyContent:'end'}}>- {item.name}</div>
+            </div>
+            ))}
         </div>
       </section>
       <Footer />

@@ -15,6 +15,7 @@ function Login({}) {
 
   const handleBtn = async ()=>{
     const fetchMenu = async () => {
+      console.log('hello')
       try {
         const response = await axios.post('https://pizzapointserver-1.onrender.com/login', {
           email: inputEmail,

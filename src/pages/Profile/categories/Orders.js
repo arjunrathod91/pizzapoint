@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../../../context/Context";
 import "./Orders.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useMediaQuery } from "@mui/material";
 
-function Orders() {
+function Orders({setSection}) {
   const { allorders, setAllOrders, rightSec, setRIghtSec } =
     useContext(Context);
   const isMobile = useMediaQuery("(max-width:600px)");
   const list = [];
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <div className="orders">
       {isMobile ? (
@@ -20,22 +21,23 @@ function Orders() {
       )}
       <div style={{padding:'20px'}}>
       <div>Recent Orders</div>
-        {allorders.map((item, index) => (
-          <div>
-            <div className="item-box" index={index}>
-              <div className="img-sec">
-                <img src={item.img} />
+      <div className="order-box" style={{cursor:'pointer'}} onClick={()=>setSection("OrderPage")}>
+        {user.order ? user.order.map((item,index)=>(
+         <div className="order-item-box">
+          <div className="order-detail-box"><span>Total:{item.total}</span><div style={{display:'flex',gap:'20px'}}><span>{item.date.date}</span> <span>{item.date.time}</span></div></div>
+          {item.order ? item.order.map((item,index)=>(
+            <div className="all-item-detail">
+              <div>
+                {item.name}
               </div>
-              <div className="info-sec">
-                <strong>{item.name}</strong>
-                <p>{item.ingridient}</p>
-                <h2>₹{item.price}</h2>
-                <p>{item.type}</p>
-                <p>{item.date}</p>
+              <div>
+              {item.price}
               </div>
             </div>
+          )):'no order'}
+         </div>
+        )):<div>You havn't order anthing</div>}
           </div>
-        ))}
       </div>
     </div>
   );

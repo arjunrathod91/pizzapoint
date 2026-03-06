@@ -9,34 +9,42 @@ function Card({ item, index }) {
   const { setCart, setTotal, cart, allorders } = useContext(Context);
 
   const user = JSON.parse(localStorage.getItem("user"));
+  const loggedIn = JSON.parse(localStorage.getItem("loggedIn"));
 
   const cartObj = async (item) => {
     setCart((prevCart) => {
       return [...prevCart, { ...item, quantity: 1 }];
     });
 
-    const userUpdate = {
-      username: user.username,
-      email: user.email,
-      password: user.password,
-      contact: user.contact,
-      address: user.address,
-      cart: [...cart, { ...item, quantity: 1 }], // Include the new item in the cart
-    };
-    console.log(userUpdate);
-    try {
-      const response = await axios.put(
-        "https://pizzapointserver-1.onrender.com/userDetail",
-        userUpdate
-      );
-      console.log("Cart updated successfully:", response.data);
-    } catch (error) {
-      console.log(error);
+    if(user){
+      const userUpdate = {
+        username: user.username,
+        email: user.email,
+        password: user.password,
+        contact: user.contact,
+        address: user.address,
+        cart: [...cart, { ...item, quantity: 1 }], // Include the new item in the cart
+        order:[...user.order || []]
+      };
+      console.log(userUpdate);
+      localStorage.setItem("user",JSON.stringify(userUpdate));
+      try {
+        const response = await axios.put(
+          "https://pizzapointserver-1.onrender.com/userDetail",
+          userUpdate
+        );
+        console.log("Cart updated successfully:", response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    else{
+      console.log("user is not existed");
     }
     setTotal((prevTotal) => prevTotal + Number(item.price));
   };
   return (
-    <div className="dishes" item={item} key={index} index={index}>
+    <div className="dishes" item={item} key={index}>
       <img src={item.img ? item.img : ''} alt="" />
       <div className="content">
         <div className="d1">

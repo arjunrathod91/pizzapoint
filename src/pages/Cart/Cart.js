@@ -74,7 +74,7 @@ function Cart() {
 
   const orderNowBtn = async () => {
     console.log(checkLoggedIn)
-    if (checkLoggedIn == true) {
+    if (user) {
       if (total > 0) {
         navigate("/paymentmethod");
         // const currentDate = new Date().toLocaleString("en-IN", {

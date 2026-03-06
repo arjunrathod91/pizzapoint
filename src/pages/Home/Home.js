@@ -230,7 +230,7 @@ function Home() {
             allItems.slice(0, loadMore).map((item, index) =>
               item?.img && isValidImage(item.img) ? (
                 // (
-                <Card item={item} key={index} index={index} />
+                <Card item={item} index={index} />
               ) : (
                 // )
                 ""

@@ -7,6 +7,7 @@ import { Context } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useMediaQuery } from "@mui/material";
+import OrderPage from "./categories/OrderPage";
 function Profile() {
   const [section, setSection] = useState("Orders");
   const { loggedIn, setLoggedIn, rightSec, setRIghtSec } = useContext(Context);
@@ -15,12 +16,15 @@ function Profile() {
   const [zIndexRight, setZiNdexRight] = useState("2");
   const [width, setWidth] = useState("100%");
   const [position, setPosition] = useState("absolute");
+  const user = JSON.parse(localStorage.getItem("user"));
   const renderSection = () => {
     switch (section) {
       case "Orders":
-        return <Orders />;
+        return <Orders setSection={setSection} />;
       case "Profile":
         return <Info />;
+      case "OrderPage":
+        return <OrderPage />;
     }
   };
 
@@ -35,12 +39,19 @@ function Profile() {
       setZiNdexRight("2");
     }
   };
+
+  const logoutbtn = () => {
+    localStorage.setItem("loggedIn", JSON.stringify(false));
+    localStorage.removeItem("user");
+    navigate('/login');
+  };
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("loggedIn"));
-    if(!user || user == "false"){
-      navigate('/login');
+    console.log(user);
+    if (!user ) {
+      localStorage.removeItem("user");
+      navigate("/login");
     }
-  });
+  }, []);
   return (
     <div className="profile">
       <div
@@ -78,19 +89,10 @@ function Profile() {
           <LocalShipping />
           <span>Orders</span>
         </div>
-        {/* <div
-          className="pro-sec"
-          onClick={() => {
-            setSection("Orders");
-            responsiveCtr();
-            setRIghtSec(true);
-          }}
-        >
-          <LocalShipping />
-          <span>Logout</span>
-        </div> */}
         <div className="pro-sec">
-          <button className="logoutbtn" onClick={()=>{localStorage.setItem('loggedIn',JSON.stringify(false));navigate('/login')}}>Logout</button>
+          <button className="logoutbtn" onClick={logoutbtn}>
+            Logout
+          </button>
         </div>
       </div>
       <div

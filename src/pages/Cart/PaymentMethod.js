@@ -6,7 +6,7 @@ import axios from "axios";
 
 function PaymentMethod() {
   const [paymentType, setPaymentType] = useState("");
-  const billObj = JSON.parse(localStorage.getItem("newOrder")) || [];
+  // const user = JSON.parse(localStorage.getItem("user")) || [];
   const { cart,setCart, allorders,total } = useContext(Context);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -14,7 +14,7 @@ function PaymentMethod() {
   const handlePayment = () => {
     const options = {
       key: "rzp_test_HY5jMRQoTZLe2y", // Enter your Razorpay Key ID
-      amount: `${billObj.total * 100}`, // Amount in paise (50000 paise = 500 INR){newPrice}
+      amount: `${total * 100}`, // Amount in paise (50000 paise = 500 INR){newPrice}
       currency: "INR",
       name: "Pizza Point",
       description: "Test Transaction",
@@ -46,18 +46,26 @@ function PaymentMethod() {
   }
 
   const payBill = async () => {
-    const currentDate = new Date().toLocaleString("en-IN", {
-      timeZone: "Asia/Kolkata",
-    });
-    const userUpdate = {
-      username: user.username,
-      email: user.email,
-      password: user.password,
-      contact: user.contact,
-      address: user.address,
-      cart: cart,
-      order: cart,
+    // const currentDate = new Date().toLocaleString("en-IN", {
+    //   timeZone: "Asia/Kolkata",
+    //   hour: "2-digit",
+    //   minute: "2-digit",
+    // });
+
+    const now = new Date();
+
+    const currentDate = {
+      time: now.toLocaleTimeString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true, // Use `true` for 12-hour format with AM/PM
+      }),
+      date: now.toLocaleDateString("en-IN", {
+        timeZone: "Asia/Kolkata",
+      }),
     };
+
     const userOrder = {
       username: user.username,
       email: user.email,
@@ -69,7 +77,19 @@ function PaymentMethod() {
       paymentType:paymentType,
       total: total,
     };
-    console.log(userOrder);
+
+    const myOrder = [...(user.order || []), userOrder];
+
+    const userUpdate = {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      contact: user.contact,
+      address: user.address,
+      cart: cart,
+      order:myOrder,
+    };
+    localStorage.setItem("user",JSON.stringify(userUpdate))
     if (paymentType === "Online") {
       handlePayment();
       setCart("");
@@ -104,7 +124,7 @@ function PaymentMethod() {
         style={{ display: "flex", justifyContent: "start" }}
       >
         <div className="bill">
-          Total Bill : ₹<span style={{ fontWeight: "500" }}>{billObj.total}</span>
+          Total Bill : ₹<span style={{ fontWeight: "500" }}>{total}</span>
         </div>
         {cart.map((item, index) => (
           <div>
